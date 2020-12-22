@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\HTTP\Controllers\userController;
+use App\HTTP\Controllers\Buyer\buyerController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +17,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('homepage');
 });
+
+Route::get('/login', [userController::class, 'loginIndex']);
+Route::post('/login', [userController::class, 'verifyUser']);
+
+Route::get('/logout', [userController::class, 'logout']);
+
+Route::get('/registration', [userController::class, 'registrationIndex']);
+Route::post('/registration', [userController::class, 'registrationSubmit']);
+
+Route::get('/reset', [userController::class, 'reset']);
+Route::post('/reset', [userController::class, 'resetSubmit']);
+
+Route::get('/dashboard', [buyerController::class, 'dashboardIndex']);
+
