@@ -29,30 +29,25 @@ class userController extends Controller
     	{
     		return redirect('/login')->withErrors($validation)->withInput();
     	}
-
-    	
+    	else{
 
         	$user = User::where(['username'=>$req->username,'password'=>$req->password])->first();
        		$req->session()->put('user', $user);
 
-        	if ($req->username = '') 
-        	{
-        		$req->session()->flash('msg', 'Username is require');
-    			return redirect('/login');
+        	
 
-            }
-
-            else if (count((array)$user) > 0) 
+            if (count((array)$user) > 0) 
             {
-            	if($user->user_roll == 'admin'){
+            	
+            	if(strtolower($user->user_roll) == 'admin'){
             		echo "admin";
             	}
 
-            	else if($user->user_roll == 'buyer'){
+            	else if(strtolower($user->user_roll) == 'buyer'){
                 	return redirect('dashboard');
             	}
             
-            	else if($user->user_roll == 'seller'){
+            	else if(strtolower($user->user_roll) == 'seller'){
                 	echo "seller";
             	}  
         	}
@@ -60,6 +55,7 @@ class userController extends Controller
     			$req->session()->flash('msg', 'invalid username/password');
     			return redirect('/login');
     		}
+    	}
     	
     	
     }
