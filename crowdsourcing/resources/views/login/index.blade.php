@@ -13,13 +13,30 @@
 			<table>
 			<tr>
 				<td>Username</td>
-				<td><input type="text" name="username"></td>
+				<td><input type="text" name="username" value="{{old('username')}}"></td>
 			</tr>
+			
+			<td></td>
+			<td>
+				
+				@error('username')
+    				<span style="color: red; font-size: 14px;">*{{ $message }}</span>
+				@enderror
+			</td>
 			<tr>
 				<td>Password</td>
-				<td><input type="password" name="password"></td>
+				<td><input type="password" name="password" value="{{old('password')}}"></td>
 			</tr>
+			<td></td>
+			<td>
+				@error('password')
+    				<span style="color: red; font-size: 14px;">*{{ $message }}</span>
+				@enderror
+			</td>
 			<tr>
+				<p style="color: red">
+			{{session('msg')}}
+		</p>
 				<td></td>
 				<td><input type="submit" name="submit" value="Submit"></td>
 			</tr>
@@ -27,6 +44,5 @@
 		<a href="/reset">Forgot Password?</a>
 		</fieldset>
 	</form>
-
 </body>
 </html>

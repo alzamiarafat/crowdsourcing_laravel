@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Validator;
 
 class userController extends Controller
 {
@@ -13,20 +14,54 @@ class userController extends Controller
 
     public function verifyUser(Request $req){
 
-        $user = User::where(['username'=>$req->username,'password'=>$req->password])->first();
-        $req->session()->put('user', $user);
+    	 $validation = Validator::make($req->all(), [
+    	 	'username' => 'required',
+    		'password' => 'required|min:6'
+        ]);
+    	
+    	/*$validation = $this->validate($req, [
+    		'username' => 'required',
+    		'password' => 'required|min:6'
+    	]);*/
 
-        if (count((array)$user) > 0) {
-            if(strtolower($user->user_roll) == 'admin'){
-            	echo "admin";
-            }else if(strtolower($user->user_roll) == 'buyer'){
-                return redirect('dashboard');
+
+    	if ($validation->fails())
+    	{
+    		return redirect('/login')->withErrors($validation)->withInput();
+    	}
+
+    	
+
+        	$user = User::where(['username'=>$req->username,'password'=>$req->password])->first();
+       		$req->session()->put('user', $user);
+
+        	if ($req->username = '') 
+        	{
+        		$req->session()->flash('msg', 'Username is require');
+    			return redirect('/login');
+
             }
-            else if(strtolower($user->user_roll) == 'seller'){
-                echo "seller";
-            }
+
+            else if (count((array)$user) > 0) 
+            {
+            	if($user->user_roll == 'admin'){
+            		echo "admin";
+            	}
+
+            	else if($user->user_roll == 'buyer'){
+                	return redirect('dashboard');
+            	}
             
-         } ;
+            	else if($user->user_roll == 'seller'){
+                	echo "seller";
+            	}  
+        	}
+        	else{
+    			$req->session()->flash('msg', 'invalid username/password');
+    			return redirect('/login');
+    		}
+    	
+    	
     }
     public function registrationIndex(){
     	return view('registration.index');

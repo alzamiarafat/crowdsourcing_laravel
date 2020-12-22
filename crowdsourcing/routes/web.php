@@ -31,5 +31,7 @@ Route::post('/registration', [userController::class, 'registrationSubmit']);
 Route::get('/reset', [userController::class, 'reset']);
 Route::post('/reset', [userController::class, 'resetSubmit']);
 
-Route::get('/dashboard', [buyerController::class, 'dashboardIndex']);
+Route::group(['middleware'=>['sessionCheck']], function(){
+	Route::get('/dashboard', [buyerController::class, 'dashboardIndex']);
+});
 
