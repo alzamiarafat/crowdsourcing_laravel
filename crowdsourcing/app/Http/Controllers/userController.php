@@ -18,12 +18,6 @@ class userController extends Controller
     	 	'username' => 'required',
     		'password' => 'required|min:6'
         ]);
-    	
-    	/*$validation = $this->validate($req, [
-    		'username' => 'required',
-    		'password' => 'required|min:6'
-    	]);*/
-
 
     	if ($validation->fails())
     	{
@@ -33,8 +27,6 @@ class userController extends Controller
 
         	$user = User::where(['username'=>$req->username,'password'=>$req->password])->first();
        		$req->session()->put('user', $user);
-
-        	
 
             if (count((array)$user) > 0) 
             {
