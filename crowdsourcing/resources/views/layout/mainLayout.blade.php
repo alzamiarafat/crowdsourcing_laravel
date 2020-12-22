@@ -12,12 +12,12 @@
 	<!--  -->
     <a href="/profile">Profile</a> |
 	<a href="/hire">Hire</a> |
-	<button><a href="#contact">Contact</a></button>  |
-	<button><a href="">Post</a></button>  |
-	<button><a href="">History</a></button>  |
-	<button><a href="/logout">Log Out</a></button>   
+	<a href="#contact">Contact</a>  |
+	<a href="">Post</a>  |
+	<a href="">History</a>  |
+	<a href="/logout">Log Out</a> 
 	
-	@yield('content');
+	@yield('content')
 
 </body>
 </html>

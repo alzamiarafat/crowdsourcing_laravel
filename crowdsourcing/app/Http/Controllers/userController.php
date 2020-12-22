@@ -17,12 +17,12 @@ class userController extends Controller
         $req->session()->put('user', $user);
 
         if (count((array)$user) > 0) {
-            if($user->user_roll == 'admin'){
+            if(strtolower($user->user_roll) == 'admin'){
             	echo "admin";
-            }else if($user->user_roll == 'buyer'){
+            }else if(strtolower($user->user_roll) == 'buyer'){
                 return redirect('dashboard');
             }
-            else if($user->user_roll == 'seller'){
+            else if(strtolower($user->user_roll) == 'seller'){
                 echo "seller";
             }
             
