@@ -17,7 +17,7 @@
 	<button><a href="">History</a></button>  |
 	<button><a href="/logout">Log Out</a></button>   
 	
-	@yield('content');
+	@yield('content')
 
 </body>
 </html>
