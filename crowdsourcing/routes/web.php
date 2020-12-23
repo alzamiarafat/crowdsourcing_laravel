@@ -20,18 +20,19 @@ Route::get('/', function () {
     return view('homepage');
 });
 
-Route::get('/login', [userController::class, 'loginIndex']);
+Route::get('/login', [userController::class, 'loginIndex'])->name('login');
 Route::post('/login', [userController::class, 'verifyUser']);
 
-Route::get('/logout', [userController::class, 'logout']);
+Route::get('/logout', [userController::class, 'logout'])->name('logout');
 
-Route::get('/registration', [userController::class, 'registrationIndex']);
+Route::get('/registration', [userController::class, 'registrationIndex'])->name('registration');
 Route::post('/registration', [userController::class, 'registrationSubmit']);
 
-Route::get('/reset', [userController::class, 'reset']);
+Route::get('/reset', [userController::class, 'reset'])->name('reset');
 Route::post('/reset', [userController::class, 'resetSubmit']);
 
 Route::group(['middleware'=>['sessionCheck']], function(){
-	Route::get('/dashboard', [buyerController::class, 'dashboardIndex']);
+	Route::get('/dashboard', [buyerController::class, 'dashboardIndex'])->name('dashboard');
+	Route::get('/profile', [buyerController::class, 'profile'])->name('profile');
 });
 

@@ -14,14 +14,14 @@ class userController extends Controller
 
     public function verifyUser(Request $req){
 
-    	 $validation = Validator::make($req->all(), [
+    	$validation = Validator::make($req->all(), [
     	 	'username' => 'required',
     		'password' => 'required|min:6'
         ]);
 
     	if ($validation->fails())
     	{
-    		return redirect('/login')->withErrors($validation)->withInput();
+    		return redirect()->route('login')->withErrors($validation)->withInput();
     	}
     	else{
 
@@ -36,7 +36,10 @@ class userController extends Controller
             	}
 
             	else if(strtolower($user->user_roll) == 'buyer'){
-                	return redirect('dashboard');
+            		 //$token = $req->session()->token();
+            		  $tokn = csrf_token();
+            		 echo $tokn;
+                	return redirect()->route('dashboard');
             	}
             
             	else if(strtolower($user->user_roll) == 'seller'){
@@ -44,8 +47,8 @@ class userController extends Controller
             	}  
         	}
         	else{
-    			$req->session()->flash('msg', 'invalid username/password');
-    			return redirect('/login');
+    			$req->session()->flash('msg', 'Invalid Username/Password');
+    			return redirect()->route('login');
     		}
     	}
     	
@@ -56,18 +59,20 @@ class userController extends Controller
     }
 
     public function registrationSubmit(){
-    	return redirect('/login');
+    	return redirect()->route('login');
     }
+    
     public function logout(Request $req){
 
     	$req->session()->flush();
-    	return redirect('/login');
+    	return redirect()->route('login');
     }
+
     public function reset(){
         return view('login.resetPassword');
     }
 
     public function resetSubmit(){
-        return redirect('login');
+        return redirect()->route('login');
     }
 }

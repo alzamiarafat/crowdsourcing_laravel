@@ -20,8 +20,8 @@ class VerifySession
         
            return $next($request);
         }else{
-                 $request->session()->flash('msg', 'invalid request...');
-                return redirect('/login');
+                 $request->session()->flash('msg', 'Please Login First......');
+                return redirect()->route('login');
             }
     }
 }

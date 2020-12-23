@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>Buyer|Portal</title>
 </head>
 <body>
+	@csrf
 
 	<h2>Welcome Dashboard</h2>	
-    <h4>Name:{{ $user->full_name }}</h4>
+    <!--  -->
 
-	<a href="/dashboard">Dashboard</a>  |
-	<!--  -->
-    <a href="/profile">Profile</a> |
-	<a href="/hire">Hire</a> |
-	<a href="#contact">Contact</a>  |
+	<a href="{{route('dashboard',csrf_token())}}">Dashboard</a>  |
+    <a href="{{route('profile',csrf_token())}}">Profile</a> |		
 	<a href="">Post</a>  |
+	<a href="">Hire</a> |
 	<a href="">History</a>  |
-	<a href="/logout">Log Out</a> 
+	<a href="#contact">Contact</a>  |
+	<a href="{{route('logout',csrf_token())}}">Log Out</a> 
 	
 	@yield('content')
 

@@ -6,21 +6,47 @@
 		<fieldset >
 		<legend>Profile</legend>
 
-		<table border="1">
+		<table style="position: relative;left: 20px;">
 			<tr>
-				<td>Username</td>
-				<td>Name</td>
-				<td>Email</td>
-				<td>Contact</td>
+				<td>ID</td>
+				<td>{{$user->id}}</td>
+			</tr>
+
+			<tr >
+				<td style="width: 40%; height: 40px;">Name</td>
+				<td >{{$user->full_name}}</td>
+			</tr>
+				
+			<tr>
+				<td style="width: 40%; height: 40px;">Username</td>
+				<td>{{$user->username}}</td>
+			</tr>
+			<tr>
+				<td style="width: 40%; height: 40px;">Password</td>
+				<td>{{$user->password}}</td>
 			</tr>
 
 			<tr>
-				<td>{{$user->username}}</td>
-				<td>{{$user->full_name}}</td>
+				<td style="width: 40%; height: 40px;">Address</td>
+				<td>{{$user->address}}</td>
+			</tr>
+
+			<tr>
+				<td style="width: 40%; height: 40px;">Contact</td>
+				<td>{{$user->contact}}</td>
+			</tr>
+
+			<tr>
+				<td style="width: 40%; height: 40px;">Email</td>
 				<td>{{$user->email}}</td>
-				<td>{{$user->contact}}</td>	
-			</tr>	
-		</table>	
+			</tr>
+
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+
+		</table>
 	</fieldset>
 	</div>
 @endsection
