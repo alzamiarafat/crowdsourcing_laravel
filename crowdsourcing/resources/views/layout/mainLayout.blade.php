@@ -12,7 +12,7 @@
     <!--  -->
 
 	<a href="{{route('dashboard',csrf_token())}}">Dashboard</a>  |
-    <a href="{{route('profile',csrf_token())}}">Profile</a> |		
+    <a href="{{route('profile', $user['id'],csrf_token())}}">Profile</a> |		
 	<a href="">Post</a>  |
 	<a href="">Hire</a> |
 	<a href="">History</a>  |

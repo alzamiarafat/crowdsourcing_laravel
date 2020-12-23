@@ -33,6 +33,12 @@ Route::post('/reset', [userController::class, 'resetSubmit']);
 
 Route::group(['middleware'=>['sessionCheck']], function(){
 	Route::get('/dashboard', [buyerController::class, 'dashboardIndex'])->name('dashboard');
-	Route::get('/profile', [buyerController::class, 'profile'])->name('profile');
+	
+	Route::get('/profile/{id}', [buyerController::class, 'profile'])->name('profile');
+	Route::post('/profile/{id}', [buyerController::class, 'uploadImage']);
+
+
+	
 });
+
 
