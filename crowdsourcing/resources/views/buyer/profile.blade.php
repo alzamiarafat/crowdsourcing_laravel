@@ -71,6 +71,12 @@
 		<script>
 			swal("Uploaded!", "Profile Picture is updated", "success");
 		</script>
+
+	@elseif(Session::has('edit_profile'))
+		<script>
+			swal("Success!", "Your Profile is updated", "success");
+		</script>
+		
 	@elseif(Session::has('err'))
 		<script>
 			swal("Error!", "Please select one!", "error");

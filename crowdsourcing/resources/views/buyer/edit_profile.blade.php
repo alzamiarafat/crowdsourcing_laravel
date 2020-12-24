@@ -34,16 +34,13 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><button type="submit" class="btn btn-outline-success btn-sm">Submit</button></td>
+				
+				<td><a href="{{route('edit_profile', $user['id'])}}{{csrf_token()}}"><button type="submit" class="btn btn-outline-success btn-sm">Submit</button></a></td>
 			</tr>
 		</table>
 				
 		</form>
 		
 	</div>
-    @if(Session::has('edit_profile'))
-		<script>
-			swal("Success!", "Your Profile is updated", "success");
-		</script>
-	@endif
+   
 @endsection

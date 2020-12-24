@@ -59,9 +59,9 @@ class buyerController extends Controller
     	//echo "sucesse";//return view('buyer.profile', ['user'=>$user]);
     }
 
-    public function editProfile(Request $req){
+    public function editProfile($id,Request $req){
         
-        $user = $req->session()->get('user');
+        $user = User::find($id);
         return view('buyer.edit_profile', ['user'=>$user]);
     }
 
@@ -75,6 +75,8 @@ class buyerController extends Controller
         $user->contact = $req->contact;
         $user->address = $req->address;
         $user->save();
+
+
 
         return redirect()->route('profile',$user->id)->with('edit_profile','Your Profile is Updated');
     }
