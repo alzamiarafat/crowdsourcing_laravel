@@ -7,7 +7,7 @@ use App\HTTP\Controllers\Buyer\buyerController;
 
 
 Route::get('/', function () {
-    return view('homepage');
+    return view('homepage', [ 'title' => "Home | Crowdsourcing"]);
 });
 
 Route::get('/login', [userController::class, 'loginIndex'])->name('login');

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Registration</title>
+	<title>{{ $title }}</title>
 	
 	<style>
 		.vertical-center {
@@ -13,9 +13,9 @@
 		}
 		.content-center{
 			width: 700px;
-			height: 850px;
+			height: auto;
 			margin-left: 25%;
-			margin-top: 10%;
+			margin-top: 5%;
 		}
 		.logo{
 			margin-left: 50px;

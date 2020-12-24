@@ -55,12 +55,12 @@
 						
 						<tr>
 							<td></td>
-							<td style="float: right"><input type="submit" name="submit" value="Submit"></td>
+							<td style="float: right"><input class="btn btn-secondary" type="submit" name="submit" value="Submit"></td>
 						</tr>
 						
 					</table>
 					<br><br>
-					<p class="message">Already registered? <a href="/login">Sign In</a></p>
+					<span class="message" style="margin-left: 7%">Already registered? <a href="/login">Sign In</a></span>
 				
 				</form>
 			</div>

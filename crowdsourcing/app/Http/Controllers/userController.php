@@ -9,7 +9,7 @@ use Validator;
 class userController extends Controller
 {
     public function loginIndex(){
-    	return view('login.index');
+    	return view('login.index', [ 'title' => 'Login']);
     }
 
     public function verifyUser(Request $req){
@@ -55,7 +55,7 @@ class userController extends Controller
     	
     }
     public function registrationIndex(){
-    	return view('registration.index');
+    	return view('registration.index', [ 'title' => 'Regostration']);
     }
 
     public function registrationSubmit(){
