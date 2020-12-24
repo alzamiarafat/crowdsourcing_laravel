@@ -22,6 +22,7 @@ class CreateUserTable extends Migration
             $table->string('contact');
             $table->string('address');
             $table->string('user_roll');
+            $table->string('profile_image')->nullable();
             $table->timestamps();
         });
     }
