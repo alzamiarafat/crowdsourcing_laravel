@@ -22,10 +22,14 @@ Route::get('/reset', [userController::class, 'reset'])->name('reset');
 Route::post('/reset', [userController::class, 'resetSubmit']);
 
 Route::group(['middleware'=>['sessionCheck']], function(){
+
 	Route::get('/dashboard', [buyerController::class, 'dashboardIndex'])->name('dashboard');
 	
 	Route::get('/profile/{id}', [buyerController::class, 'profile'])->name('profile');
 	Route::post('/profile/{id}', [buyerController::class, 'uploadImage']);
+
+	Route::get('/edit_profile/{id}', [buyerController::class, 'editProfile'])->name('edit_profile');
+	Route::post('/edit_profile/{id}', [buyerController::class, 'updateProfile']);
 
 
 	

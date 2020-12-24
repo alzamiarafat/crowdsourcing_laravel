@@ -44,38 +44,36 @@
 
 			<tr>
 				<td></td>
-				<td><a href=""><button type="button" class="btn btn-secondary">Edit Profile</button></a><br><br></td>
+				<td><a href="{{route('edit_profile', $user['id'])}}{{csrf_token()}}"><button type="button" class="btn btn-secondary">Edit Profile</button></a><br><br></td>
 			</tr>
 
 		</table>
 
-		
-
 		<form method="POST" action="{{route('profile', $user['id'])}}" enctype="multipart/form-data">
 			<input type="hidden" name="_token" value="{{csrf_token()}}">
+			
 			<div style="position: absolute; left: 30%; top: 120px">
 
-				<img id="previewImg" src="" width="200" height="200"><br><br>
+				<img id="previewImg" src="{{asset('uploads/')}}/{{$user->profile_image}}" width="200" height="200"><br><br>
 				<input type="file" style="border: 1px solid lightgray;border-radius: 5px;" name="profile_photo" accept="image/*" 		onchange="document.getElementById('previewImg').src = window.URL.createObjectURL(this.files[0])">
 				<br><br>
 				
 				<button type="submit" class="btn btn-outline-success btn-sm">Upload</button>
-				<!-- <button>Upload</button> -->
-
 			</div>
 				
 		</form>
 		
 	</fieldset>
 	</div>
-@if(Session::has('pic_upload'))
-	<script>
-		swal("Uploaded!",{"!! Session::get('pic_upload') !!"},"success",{
-			button:ok,
-		})
-	</script>
+	
+	@if(Session::has('pic_upload'))
+
+		<script>
+			swal("Uploaded!", "Profile Picture is updated", "success");
+		</script>
+	@elseif(Session::has('err'))
+		<script>
+			swal("Error!", "Please select one!", "error");
+		</script>
 	@endif
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" 
-	integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous">
-</script>
 @endsection

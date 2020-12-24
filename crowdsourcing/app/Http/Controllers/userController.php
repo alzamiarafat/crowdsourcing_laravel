@@ -36,9 +36,6 @@ class userController extends Controller
             	}
 
             	else if(strtolower($user->user_roll) == 'buyer'){
-            		 //$token = $req->session()->token();
-            		  $tokn = csrf_token();
-            		 echo $tokn;
                 	return redirect()->route('dashboard');
             	}
             
