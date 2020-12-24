@@ -16,9 +16,25 @@
     <h4>Name: {{$user-> full_name}}</h4>
 
 	<a href="{{route('dashboard',csrf_token())}}">Dashboard</a>  |
-    <a href="{{route('profile', $user['id'])}}{{csrf_token()}}">Profile</a> |		
-	<a href="">Post</a>  |
-	<a href="">Hire</a> |
+	<a href="{{route('profile', $user['id'])}}{{csrf_token()}}">Profile</a> |
+	<li class="has-sub">
+		<a class="js-arrow" href="#">
+		   <i class="fas fa-cogs"></i> Operation</a>
+		<ul class="list-unstyled navbar__sub-list js-sub-list">
+			<li><a href="{{route('create_post',csrf_token())}}"><i class="fas fa-plus-circle"></i>Write Post </a></li>  
+			
+		</ul>
+	</li>
+	<li class="has-sub">
+		<a class="js-arrow" href="#">
+			<i class="fas fa-table"></i>Tables</a>
+		<ul class="list-unstyled navbar__sub-list js-sub-list">
+			<li>
+			   <a href="/buyer/sellers"><i class="fas fa-users"></i>Sellers</a>
+			   <li><a href="/buyer/post_list"><i class="fas fa-list-alt"></i>Posts</a></li>
+			</li>
+		</ul>
+	</li>
 	<a href="">History</a>  |
 	<a href="#contact">Contact</a>  |
 	<a href="{{route('logout',csrf_token())}}">Log Out</a> 

@@ -20,8 +20,8 @@ class CreatePostTableTable extends Migration
             $table->string('status');
             $table->integer('buyer_id');
             $table->double('amount');
-            $table->integer('seller_id');
-            $table->string('seller_name');
+            $table->integer('seller_id')->nullable();
+            $table->string('seller_name')->nullable();
             $table->string('buyer_name');
             $table->timestamps();
         });

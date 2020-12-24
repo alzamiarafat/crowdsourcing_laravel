@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PostTable extends Model
 {
     use HasFactory;
+    protected $table = "post_table";
+   	protected $primaryKey = "id";
+   	public $timestamps = false;
 }

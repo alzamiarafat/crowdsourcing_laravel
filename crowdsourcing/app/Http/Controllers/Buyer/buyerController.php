@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Buyer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\PostTable;
+
 
 class buyerController extends Controller
 {
@@ -75,9 +77,28 @@ class buyerController extends Controller
         $user->contact = $req->contact;
         $user->address = $req->address;
         $user->save();
-
-
-
         return redirect()->route('profile',$user->id)->with('edit_profile','Your Profile is Updated');
+    }
+
+    public function post(Request $req){
+        
+        // $user = User::find($id);
+        $user = $req->session()->get('user');
+        return view('buyer.post_create', ['user'=>$user]);
+    }
+
+    public function createPost(Request $req){
+
+        $createPost = new PostTable();
+
+        $createPost->buyer_id   = $req->buyer_id;
+        $createPost->buyer_name =$req->buyer_name;
+        $createPost->title      = $req->title;
+        $createPost->post_body  = $req->post_body;
+        $createPost->status     = $req->status;
+        $createPost->amount     = $req->amount;
+        
+        $createPost->save();
+        return back()->with('create_post','Your Profile is Updated');
     }
 }
