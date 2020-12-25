@@ -35,7 +35,7 @@ class userController extends Controller
             {
             	
             	if(strtolower($user->user_roll) == 'admin'){
-            		echo "admin";
+            		return redirect()->route('adminDashboard');
             	}
 
             	else if(strtolower($user->user_roll) == 'buyer'){

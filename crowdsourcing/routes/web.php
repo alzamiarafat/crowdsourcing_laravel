@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\adminController;
 use Illuminate\Support\Facades\Route;
 use App\HTTP\Controllers\userController;
 use App\HTTP\Controllers\Buyer\buyerController;
@@ -21,6 +22,14 @@ Route::post('/registration', [userController::class, 'registrationSubmit']);
 Route::get('/reset', [userController::class, 'reset'])->name('reset');
 Route::post('/reset', [userController::class, 'resetSubmit']);
 
+
+// Admin routes
+Route::group(['middleware'=>['sessionCheck']] , function () {
+	Route::get('/admin/dashboard', [adminController::class, 'dashboard'])->name('adminDashboard');
+});
+
+
+//  Buyer routes
 Route::group(['middleware'=>['sessionCheck']], function(){
 
 	Route::get('/dashboard', [buyerController::class, 'dashboardIndex'])->name('dashboard');
