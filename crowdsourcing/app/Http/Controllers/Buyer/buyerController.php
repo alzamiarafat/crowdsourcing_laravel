@@ -79,8 +79,15 @@ class buyerController extends Controller
         $user->save();
         return redirect()->route('profile',$user->id)->with('edit_profile','Your Profile is Updated');
     }
+    public function postList(Request $req){
+        
+        // $user = User::find($id);
+        $user = $req->session()->get('user');
+        $posts = PostTable::all();
+        return view('buyer.post_list', ['posts'=>$posts],['user'=>$user]);
+    }
 
-    public function post(Request $req){
+    public function createPostIndex(Request $req){
         
         // $user = User::find($id);
         $user = $req->session()->get('user');
@@ -99,6 +106,6 @@ class buyerController extends Controller
         $createPost->amount     = $req->amount;
         
         $createPost->save();
-        return back()->with('create_post','Your Profile is Updated');
+        return back()->with('create_post','Post inserted');
     }
 }
