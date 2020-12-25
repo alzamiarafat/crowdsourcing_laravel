@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $title }}</title>
+    <title>{{ Session::get('user')->username }} | {{ $title }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        .counter .counter-lg {
+            top: -24px !important;
+            font-size: 5px;
+        }
+    </style>
 </head>
 <body>
     
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <h3><a class="navbar-brand" href="#">Crowd Sourcing</a></h3>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,9 +27,7 @@
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#">Dashboard</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Profile</a>
-              </li>
+              
               <li class="nav-item dropdown">
                 
                 <div class="nav-item dropdown">
@@ -69,9 +75,34 @@
                   </form>
               </li>
             </ul>
+
+            <div class="nav-item dropdown" style="width: 35px">
+                
+                <div class="icon-bar nav-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a style="color: darkgray" href="#"><i class="fa fa-bell"></i></a><span style="font-size: 10px; color: red">1</span>
+                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <p class="dropdown-item">notification ---------------</p>
+                    <p class="dropdown-item">notification ---------------</p>
+                </div>
+            </div>
+            <div style="width: 10px"></div>
+            <div class="nav-item dropdown" style="width: 50px">
+                
+                <div class="icon-bar nav-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a style="color: darkgray" href="#"><i class="fa fa-envelope"></i></a><span style="font-size: 10px; color: red">1</span>
+                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <p class="dropdown-item">message --------------------</p>
+                    <p class="dropdown-item">message --------------------</p>
+                </div>
+            </div>
             
+            
+
+
             <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" type="button" style="color: black"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" type="button" style="color: white"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ Session::get('user')->full_name }}
                 </a>
                 
@@ -81,6 +112,7 @@
                   <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                 </div>
             </div>
+            
           </div>
         </div>
       </nav>
