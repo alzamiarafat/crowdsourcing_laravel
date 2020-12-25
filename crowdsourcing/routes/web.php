@@ -31,7 +31,9 @@ Route::group(['middleware'=>['sessionCheck']], function(){
 	Route::get('/edit_profile/{id}', [buyerController::class, 'editProfile'])->name('edit_profile');
 	Route::post('/edit_profile/{id}', [buyerController::class, 'updateProfile']);
 
-	Route::get('/create_post', [buyerController::class, 'post'])->name('create_post');
+	Route::get('/post_list', [buyerController::class, 'postList'])->name('post_list');
+
+	Route::get('/create_post', [buyerController::class, 'createPostIndex'])->name('create_post');
 	Route::post('/create_post', [buyerController::class, 'createPost']);
 
 

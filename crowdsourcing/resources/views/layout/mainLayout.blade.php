@@ -31,7 +31,7 @@
 		<ul class="list-unstyled navbar__sub-list js-sub-list">
 			<li>
 			   <a href="/buyer/sellers"><i class="fas fa-users"></i>Sellers</a>
-			   <li><a href="/buyer/post_list"><i class="fas fa-list-alt"></i>Posts</a></li>
+			   <li><a href="{{route('post_list',csrf_token())}}"><i class="fas fa-list-alt"></i>Posts</a></li>
 			</li>
 		</ul>
 	</li>
