@@ -16,6 +16,7 @@
 			height: auto;
 			margin-left: 25%;
 			margin-top: 5%;
+			align-items: center
 		}
 		.logo{
 			margin-left: 50px;

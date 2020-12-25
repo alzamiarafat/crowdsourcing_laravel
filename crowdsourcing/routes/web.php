@@ -38,4 +38,3 @@ Route::group(['middleware'=>['sessionCheck']], function(){
 	
 });
 
-
