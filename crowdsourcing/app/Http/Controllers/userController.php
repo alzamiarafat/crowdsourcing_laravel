@@ -67,7 +67,7 @@ class userController extends Controller
 			'email' => 'email|required',
 			'contact' => 'required|min:11|max:14',
 			'address' => 'string|min:3|required',
-			'user_roll' => 'string|required|min:5|max:6'
+			'user_roll' => 'string|required'
 		]);
 		
 		if($valid->fails()){
@@ -80,7 +80,20 @@ class userController extends Controller
 			}
 			else{
 				// echo "saqib";
-				return $req->all();
+
+				$user = new User();
+
+				$user->full_name = $req->full_name;
+				$user->username = $req->username;
+				$user->password = $req->password;
+				$user->email = $req->email;
+				$user->contact = $req->contact;
+				$user->address = $req->address;
+				$user->user_roll = strtolower($req->user_roll);
+
+				$user->save();
+
+				return redirect()->route('login');
 
 			}
 		}
