@@ -16,21 +16,22 @@
                 </tr>
             </thead>
             <tbody>
-        
+        		@for($i=0; $i < count($posts); $i++)
                 <tr>
-                    <td style="  padding: 6px 3px;"><%= pst.id %></td>
-                    <td style="  padding: 6px 3px;"><%= pst.title %></td>
-                    <td style="  padding: 6px 3px;"><%= pst.status %></td>
-                    <td style="  padding: 6px 3px;"><%= pst.post_body %></td>
-                    <td style="  padding: 6px 3px;"><%= pst.amount %></td>
-                    <td style="  padding: 6px 3px;">
-                        <a href="/buyer/edit_post/<%= pst.id %>"> <button type="button" class="btn btn-outline-info" style="height: 32px;text-align: center;">Edit</button></a> |
+                    <td style="  padding: 6px 3px;text-align: center;">{{$posts[$i]['id']}}</td>
+                    <td style="  padding: 6px 3px;text-align: center;">{{$posts[$i]['title']}}</td>
+                    <td style="  padding: 6px 3px;text-align: center;">{{$posts[$i]['status']}}</td>
+                    <td style="  padding: 6px 3px;text-align: center;">{{$posts[$i]['post_body']}}</td>
+                    <td style="  padding: 6px 3px;text-align: center;">{{$posts[$i]['amount']}}</td>
+                    <td style="  padding: 6px 3px;text-align: center;">
+                        <a href="/buyer/edit_post/<%= pst.id %>"> <button type="button" class="btn btn-outline-info" style="height: 32px;">Edit</button></a> |
                         <a href="/buyer/delete/<%= pst.id %>"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></a> |
                         <a href="/buyer/available/<%= pst.id %>/<%= 'Available' %>"><button type="button" class="btn btn-outline-success btn-sm">Available</button> |</a>
                         <a href="/buyer/available/<%= pst.id%>/<%= 'Unavailable' %>"><button type="button" class="btn btn-outline-warning btn-sm">Unavailable</button></a>
                     </td>
                  </tr> 
             </tbody>
+            @endfor
         </table>
     </div>
 
