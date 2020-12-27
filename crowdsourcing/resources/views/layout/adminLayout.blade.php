@@ -9,10 +9,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+    
 
     <style>
         .counter .counter-lg {
@@ -20,10 +17,17 @@
             font-size: 5px;
         }
         .title-style{
-          margin-left: 75px;
+          text-align: center;
         }
-        .btn-style{
-          margin-left: 60px;
+        .footer{
+          
+          color: aliceblue;
+          background-color: rgb(13, 20, 20);
+          padding: 15px 5px;
+          text-align: center;
+        }
+        .spacefooter{
+          height: 100px;
         }
     </style>
 </head>
@@ -38,7 +42,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Dashboard</a>
+                <a class="nav-link" aria-current="page" href="{{ route('adminDashboard') }}">Dashboard</a>
               </li>
               
               <li class="nav-item dropdown">
@@ -132,6 +136,13 @@
 
       @yield('content')
 
+      <div class="spacefooter">
+
+      </div>
+      <div class="footer">
+        &copy; Copyright 
+        <span style="font-size: 10px">Advance Programing and Web Technology Course project</span>
+      </div>
 
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>

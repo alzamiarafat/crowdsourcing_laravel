@@ -49,9 +49,8 @@
         <div class="card" style="width: 18rem;">
             <img src="{{ asset('carouse_imgs/1.jpg') }}" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title title-style">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary btn-style">Go somewhere</a>
+              <h5 class="card-title title-style">Total Buyers</h5>
+              <h1 class="card-text title-style">{{ $buyersCount }}</h1>
             </div>
           </div>
       </div>
@@ -59,9 +58,8 @@
         <div class="card" style="width: 18rem;">
             <img src="{{ asset('carouse_imgs/2.jpg') }}" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title title-style">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary btn-style">Go somewhere</a>
+              <h5 class="card-title title-style">Total Sellers</h5>
+              <h1 class="card-text title-style">{{ $sellersCount }}</h1>
             </div>
           </div>
       </div>
@@ -69,9 +67,8 @@
         <div class="card" style="width: 18rem;">
             <img src="{{ asset('carouse_imgs/3.jpg') }}" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title title-style">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary btn-style">Go somewhere</a>
+              <h5 class="card-title title-style">Total People</h5>
+              <h1 class="card-text title-style">{{ $newJoined }}</h1>
             </div>
           </div>
       </div>
