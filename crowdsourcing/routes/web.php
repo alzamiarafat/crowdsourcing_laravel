@@ -42,6 +42,8 @@ Route::group(['middleware'=>['sessionCheck']], function(){
 	Route::post('/edit_profile/{id}', [buyerController::class, 'updateProfile']);
 
 	Route::get('/post_list', [buyerController::class, 'postList'])->name('post_list');
+	Route::get('/sellers', [buyerController::class, 'sellerList'])->name('sellers');
+
 
 	Route::get('/create_post', [buyerController::class, 'createPostIndex'])->name('create_post');
 	Route::post('/create_post', [buyerController::class, 'createPost']);
@@ -50,6 +52,8 @@ Route::group(['middleware'=>['sessionCheck']], function(){
 
 	Route::get('/post_available/{id}', [buyerController::class, 'postAvailable'])->name('post_available');
 	Route::get('/post_unavailable/{id}', [buyerController::class, 'postUnavailable'])->name('post_unavailable');
+
+
 	//Route::post('/create_post', [buyerController::class, 'createPost']);
 
 

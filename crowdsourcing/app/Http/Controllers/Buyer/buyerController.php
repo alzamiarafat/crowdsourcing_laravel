@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\PostTable;
+use App\Models\Seller;
+
 
 
 class buyerController extends Controller
@@ -87,6 +89,14 @@ class buyerController extends Controller
         return view('buyer.post_list', ['posts'=>$posts],['user'=>$user]);
     }
 
+    public function sellerList(Request $req){
+        
+        // $user = User::find($id);
+        $user = $req->session()->get('user');
+        $sellers = Seller::all();
+        return view('buyer.seller_list', ['sellers'=>$sellers],['user'=>$user]);
+    }
+    
     public function createPostIndex(Request $req){
         
         // $user = User::find($id);

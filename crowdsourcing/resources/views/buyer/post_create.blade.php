@@ -31,7 +31,7 @@
         </tr>								
         <tr>
             <td>Status</td>
-            <td style="  padding: 6px 3px;"><input type="text" name="status" value="Available" style="background-color: #F0F1F1;height: 35px;width: 150%;text-align: center;"></td>
+            <td style="  padding: 6px 3px;"><input type="text" name="status" placeholder="Available/Unavailable" style="background-color: #F0F1F1;height: 35px;width: 150%;text-align: center;"></td>
         </tr>
         <tr>
             <td>Description</td>

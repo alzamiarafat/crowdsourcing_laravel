@@ -15,11 +15,12 @@ class CreateSellerTable extends Migration
     {
         Schema::create('seller', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('username');
+            $table->integer('seller_id');
+            $table->string('seller_name');
             $table->string('category_name');
             $table->double('balance');
             $table->string('project_title');
+            $table->string('buyer_id');
             $table->string('buyer_name');
             $table->timestamps();
         });

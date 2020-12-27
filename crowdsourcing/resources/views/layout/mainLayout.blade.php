@@ -30,7 +30,7 @@
 			<i class="fas fa-table"></i>Tables</a>
 		<ul class="list-unstyled navbar__sub-list js-sub-list">
 			<li>
-			   <a href="/buyer/sellers"><i class="fas fa-users"></i>Sellers</a>
+			   <a href="{{route('sellers',csrf_token())}}"><i class="fas fa-users"></i>Sellers</a>
 			   <li><a href="{{route('post_list',csrf_token())}}"><i class="fas fa-list-alt"></i>Posts</a></li>
 			</li>
 		</ul>
