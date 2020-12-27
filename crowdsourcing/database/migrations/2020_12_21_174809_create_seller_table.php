@@ -20,6 +20,7 @@ class CreateSellerTable extends Migration
             $table->string('category_name');
             $table->double('balance');
             $table->string('project_title');
+            $table->string('project_body');
             $table->string('buyer_id');
             $table->string('buyer_name');
             $table->timestamps();

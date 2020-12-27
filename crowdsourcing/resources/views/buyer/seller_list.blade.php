@@ -26,7 +26,7 @@
 
                     <td style="  padding: 6px 3px;">
                         <a href="/buyer/message/<%=s.user_id%>"><button type="button" class="btn btn-outline-success btn-sm">Chat</button></a>   |
-                        <a href="/buyer/details/<%=s.user_id%>"><button type="button" class="btn btn-outline-primary btn-sm">Details</button></a>
+                        <a href="{{route('seller_profile', $sellers[$i]['seller_id'])}}{{csrf_token()}}"><button type="button" class="btn btn-outline-primary btn-sm">Details</button></a>
 
                     </td>
                  </tr> 

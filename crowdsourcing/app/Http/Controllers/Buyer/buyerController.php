@@ -150,4 +150,15 @@ class buyerController extends Controller
         $posts = PostTable::all();
         return view('buyer.post_list', ['posts'=>$posts],['user'=>$user]);
     }
+
+    public function sellerProfile($id,Request $req){
+        
+        $seller = Seller::find($id);
+        $seller_in_userTable = User::find($id);
+        
+        $user = $req->session()->get('user');
+        return view('buyer.seller_profile', ['seller'=>$seller,'user'=>$user],['seller_in_userTable'=>$seller_in_userTable]);
+    }
+
+    
 }
