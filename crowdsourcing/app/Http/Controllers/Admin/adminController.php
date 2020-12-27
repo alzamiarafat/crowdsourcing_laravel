@@ -10,18 +10,30 @@ class adminController extends Controller
 {
     public function dashboard(){
 
-        $getBuyers = User::where('user_roll', 'buyer')->get()->count();
-        $getSellers = User::where('user_roll', 'seller')->get()->count();
+        $getBuyers = User::where('user_roll', 'buyer')->get();
+        $getSellers = User::where('user_roll', 'seller')->get();
+        $getAdmins = User::where('user_roll', 'admin')->get();
         $getLastJoinedPeople = User::latest('created_at')->get()->count();
 
+        // $getPeople = User::where('user_roll', 'buyer')
+        //                     ->orWhere('user_roll', 'seller')
+        //                     ->get();
+        
         
         $dashboardData = [
             'title' => 'Admin',
-            'buyersCount' => $getBuyers,
-            'sellersCount' => $getSellers,
+            'buyersCount' => $getBuyers->count(),
+            'sellersCount' => $getSellers->count(),
             'newJoined' => $getLastJoinedPeople,
+            'admins' => $getAdmins,
+            'buyers' => $getBuyers,
+            'sellers' => $getSellers,
         ];
 
         return view('admin.dashboard', $dashboardData);
+    }
+
+    public function ViewProfile(){
+        return "none";
     }
 }

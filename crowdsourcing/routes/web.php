@@ -26,6 +26,7 @@ Route::post('/reset', [userController::class, 'resetSubmit']);
 // Admin routes
 Route::group(['middleware'=>['sessionCheck']] , function () {
 	Route::get('/admin/dashboard', [adminController::class, 'dashboard'])->name('adminDashboard');
+	Route::get('/admin/profileview/{id}', [adminController::class, 'ViewProfile'])->name('profileView');
 });
 
 
