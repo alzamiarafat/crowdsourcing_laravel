@@ -53,10 +53,5 @@
                             </form>
 </div>
 
-@if(Session::has('create_post'))
 
-		<script>
-			swal("Inserted!", "Profile Picture is updated", "success");
-		</script>
-	@endif
 @endsection

@@ -38,7 +38,28 @@
     @if(Session::has('create_post'))
 
 		<script>
-			swal("Success!", "Post is inserted", "success");
+			swal("Done!", "Post is Created", "success");
 		</script>
+	@elseif(Session::has('delete'))
+
+		<script>
+			swal({
+  				title: "Are you sure?",
+  				text: "Once deleted, you will not be able to recover this imaginary file!",
+  				icon: "warning",
+ 	 			buttons: true,
+  				dangerMode: true,
+			})
+			.then((willDelete) => {
+  				if (willDelete) {
+    				swal("Poof! Your imaginary file has been deleted!", {
+      				icon: "success",
+    				});
+  				} else {
+    				swal("Your imaginary file is safe!");
+  				}
+			});
+		</script>
+	
 	@endif
 @endsection

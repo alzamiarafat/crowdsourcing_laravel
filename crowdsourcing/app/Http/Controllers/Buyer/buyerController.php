@@ -106,6 +106,6 @@ class buyerController extends Controller
         $createPost->amount     = $req->amount;
         
         $createPost->save();
-        return back()->with('create_post','Post inserted');
+         return redirect()->route('post_list')->with('create_post','Post inserted');
     }
 }
