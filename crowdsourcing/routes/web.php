@@ -46,6 +46,12 @@ Route::group(['middleware'=>['sessionCheck']], function(){
 	Route::get('/create_post', [buyerController::class, 'createPostIndex'])->name('create_post');
 	Route::post('/create_post', [buyerController::class, 'createPost']);
 
+	Route::get('/post_delete/{id}', [buyerController::class, 'postDelete'])->name('post_delete');
+
+	Route::get('/post_available/{id}', [buyerController::class, 'postAvailable'])->name('post_available');
+	Route::get('/post_unavailable/{id}', [buyerController::class, 'postUnavailable'])->name('post_unavailable');
+	//Route::post('/create_post', [buyerController::class, 'createPost']);
+
 
 	
 });

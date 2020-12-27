@@ -25,9 +25,9 @@
                     <td style="  padding: 6px 3px;text-align: center;">{{$posts[$i]['amount']}}</td>
                     <td style="  padding: 6px 3px;text-align: center;">
                         <a href="/buyer/edit_post/<%= pst.id %>"> <button type="button" class="btn btn-outline-info" style="height: 32px;">Edit</button></a> |
-                        <a href="/buyer/delete/<%= pst.id %>"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></a> |
-                        <a href="/buyer/available/<%= pst.id %>/<%= 'Available' %>"><button type="button" class="btn btn-outline-success btn-sm">Available</button> |</a>
-                        <a href="/buyer/available/<%= pst.id%>/<%= 'Unavailable' %>"><button type="button" class="btn btn-outline-warning btn-sm">Unavailable</button></a>
+                        <a href="{{route('post_delete', $posts[$i]['id'])}}{{csrf_token()}}">Delete</a> |
+                        <a href="{{route('post_available', $posts[$i]['id'])}}{{csrf_token()}}"><button type="button" class="btn btn-outline-success btn-sm">Available</button> |</a>
+                        <a href="{{route('post_unavailable', $posts[$i]['id'])}}{{csrf_token()}}"><button type="button" class="btn btn-outline-warning btn-sm">Unavailable</button></a>
                     </td>
                  </tr> 
             </tbody>
@@ -39,26 +39,27 @@
 
 		<script>
 			swal("Done!", "Post is Created", "success");
-		</script>
-	@elseif(Session::has('delete'))
+        </script>
+    
+	@elseif(Session::has('post_delete'))
 
 		<script>
 			swal({
-  				title: "Are you sure?",
-  				text: "Once deleted, you will not be able to recover this imaginary file!",
-  				icon: "warning",
- 	 			buttons: true,
-  				dangerMode: true,
-			})
-			.then((willDelete) => {
-  				if (willDelete) {
-    				swal("Poof! Your imaginary file has been deleted!", {
-      				icon: "success",
-    				});
-  				} else {
-    				swal("Your imaginary file is safe!");
-  				}
-			});
+  title: "Are you sure?",
+  text: "Once deleted, you will not be able to recover this imaginary file!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    swal("Poof! Your imaginary file has been deleted!", {
+      icon: "success",
+    });
+  } else {
+    swal("Your imaginary file is safe!");
+  }
+});
 		</script>
 	
 	@endif

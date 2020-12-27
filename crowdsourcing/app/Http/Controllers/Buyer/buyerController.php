@@ -108,4 +108,36 @@ class buyerController extends Controller
         $createPost->save();
          return redirect()->route('post_list')->with('create_post','Post inserted');
     }
+    public function postDelete($id,Request $req){
+        
+        //$user = PostTable::find($id);
+        $user = PostTable::where(['id'=>$req->id])->delete();
+        $user = $req->session()->get('user');
+        $posts = PostTable::all();
+        return redirect()->route('post_list')->with('post_delete','Your Profile is Updated');
+    }
+
+    public function postAvailable($id,Request $req){
+        
+        $post = PostTable::find($id);
+
+        $post->status   = 'Available';
+        $post->save();
+        
+        $user = $req->session()->get('user');
+        $posts = PostTable::all();
+        return view('buyer.post_list', ['posts'=>$posts],['user'=>$user]);
+    }
+
+    public function postUnavailable($id,Request $req){
+        
+        $post = PostTable::find($id);
+
+        $post->status   = 'Unavailable';
+        $post->save();
+        
+        $user = $req->session()->get('user');
+        $posts = PostTable::all();
+        return view('buyer.post_list', ['posts'=>$posts],['user'=>$user]);
+    }
 }
