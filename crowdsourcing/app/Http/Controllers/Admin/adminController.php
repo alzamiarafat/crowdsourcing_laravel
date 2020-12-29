@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Validator;
 
 class adminController extends Controller
@@ -56,8 +58,12 @@ class adminController extends Controller
         if($checkValidation->fails()){
     		return redirect()->route('resetPassword')->withErrors($checkValidation);
         }else{
+            DB::table('user')
+                        ->where('id', Session::get('user')->id)
+                        ->update(['password' => $req->password]);
             
-            return 'done';
+    		$req->session()->flash('alert', 'Password Changed!<br>Please Login');
+            return redirect()->route('login');
         }
 
         // return $req->input();
