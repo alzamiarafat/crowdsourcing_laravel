@@ -27,6 +27,9 @@ Route::post('/reset', [userController::class, 'resetSubmit']);
 Route::group(['middleware'=>['sessionCheck']] , function () {
 	Route::get('/admin/dashboard', [adminController::class, 'dashboard'])->name('adminDashboard');
 	Route::get('/admin/profileview/{id}', [adminController::class, 'ViewProfile'])->name('profileView');
+
+	Route::get('/reset', [adminController::class, 'resetPassword'])->name('resetPassword');
+	Route::post('/changePassword', [adminController::class, 'changePassword'])->name('changePassword');
 });
 
 

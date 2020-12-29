@@ -21,7 +21,7 @@ class adminController extends Controller
         
         
         $dashboardData = [
-            'title' => 'Admin',
+            'title' => 'Dashboard',
             'buyersCount' => $getBuyers->count(),
             'sellersCount' => $getSellers->count(),
             'newJoined' => $getLastJoinedPeople,
@@ -35,5 +35,21 @@ class adminController extends Controller
 
     public function ViewProfile(){
         return "none";
+    }
+
+    public function resetPassword(Request $req){
+
+
+
+        $resetPassword_data = [
+            'title' => 'Reset password',
+
+        ];
+        return view('admin.resetPassword', $resetPassword_data);
+        // return $id;
+    }
+
+    public function changePassword(Request $req){
+        return $req->input();
     }
 }
