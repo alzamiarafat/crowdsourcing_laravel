@@ -134,6 +134,7 @@
                 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a class="dropdown-item" href="{{ route('profileView', Session::get('user')->id) }}">Profile</a>
+                  <a class="dropdown-item" href="{{ route('admin.editProfile', Session::get('user')->id) }}">Edit profile</a>
                   <a class="dropdown-item" href="{{ route('resetPassword') }}">Reset Password</a>
                   <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                 </div>

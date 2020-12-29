@@ -29,6 +29,7 @@
                     <br>
                 </div>
             
+                <a href="{{ route('adminDashboard') }}" type="button" class="btn btn-success mb-4" style="margin-right: 10px">Cancel</a>
                 <button type="submit" class="btn btn-success mb-4">Change password</button>
         
             </form>

@@ -20,8 +20,17 @@
 
                     @if ($data->user_roll == 'admin')
                         <div style="padding-top: 30px">
+                            <a href="{{ route('adminDashboard') }}" class="btn btn-primary">Back</a>
+
                             <a href="{{ route('admin.editProfile', Session::get('user')->id) }}" type="button" class="btn btn-secondary">Edit Profile</a>
                         </div>
+                    @endif
+                    <br><br>
+
+                    @if ($data->user_roll == 'buyer' || $data->user_roll == 'seller')
+                        <a href="{{ route('adminDashboard') }}" class="btn btn-primary">Back</a>
+                        <a href="" class="btn btn-secondary">Message</a>
+                        <a href="" class="btn btn-danger">Delete {{ $data->username }}</a>
                     @endif
                 </div>
 
