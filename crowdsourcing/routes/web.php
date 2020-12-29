@@ -34,7 +34,7 @@ Route::group(['middleware'=>['sessionCheck']] , function () {
 	Route::post('/changePassword', [adminController::class, 'changePassword'])->name('changePassword');
 
 	Route::get('/editProfile/{id}', [adminController::class, 'EditProfile'])->name('admin.editProfile');
-	Route::get('/editProfile/{id}', [adminController::class, 'EditProfile'])->name('admin.editProfile');
+	Route::post('/editProfile/{id}', [adminController::class, 'saveProfile']);
 
 });
 

@@ -100,6 +100,28 @@ class adminController extends Controller
     }
 
     public function EditProfile($id, Request $req){
-        return "$id";
+
+        $getUser = User::find($id);
+
+        $edit_profile = [
+            'title' => 'Edit Profile',
+            'data' => $getUser
+        ];
+        return view('admin.editProfile', $edit_profile);
+    }
+
+    public function saveProfile($id, Request $req){
+        
+        DB::table('user')
+                    ->where('id', $id)
+                    ->update([
+                        'full_name' => $req->full_name,
+                        'username' => $req->username,
+                        'email' => $req->email,
+                        'contact' => $req->contact,
+                        'address' => $req->address
+                    ]);
+            
+        return redirect()->route('profileView', $id);
     }
 }

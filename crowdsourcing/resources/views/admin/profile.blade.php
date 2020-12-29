@@ -7,18 +7,22 @@
         <div class="row">
             {{-- First column --}}
             <div class="col-7">
-                User Type:
-                <h5 style="color: orange"> {{ Str::ucfirst($data->user_roll) }}</h5>
-                <span>User name:<h5> {{ $data->username }}</h5></span>
-                <span>Email:<h5> {{ $data->email }}</h5></span>
-                @if ($data->user_roll == 'admin')
-                    <span>Password: <h5>{{ $data->password }}</h5></span>
-                @endif
-                <span>Contact No:<h5> {{ $data->contact }}</h5></span>
-                <span>Address:<h5> {{ $data->address }}</h5></span>
+                <div style="margin-left: 60px">
+                    <h3 style="color: orange"> {{ Str::ucfirst($data->user_roll) }}</h3>
+                    <br>
+                    <span>User name:<h5> {{ $data->username }}</h5></span>
+                    <span>Email:<h5> {{ $data->email }}</h5></span>
+                    @if ($data->user_roll == 'admin')
+                        <span>Password: <h5>{{ $data->password }}</h5></span>
+                    @endif
+                    <span>Contact No:<h5> {{ $data->contact }}</h5></span>
+                    <span>Address:<h5> {{ $data->address }}</h5></span>
 
-                <div style="padding-top: 30px">
-                    <a href="{{ route('admin.editProfile', Session::get('user')->id) }}" type="button" class="btn btn-secondary">Edit Profile</a>
+                    @if ($data->user_roll == 'admin')
+                        <div style="padding-top: 30px">
+                            <a href="{{ route('admin.editProfile', Session::get('user')->id) }}" type="button" class="btn btn-secondary">Edit Profile</a>
+                        </div>
+                    @endif
                 </div>
 
             </div>
