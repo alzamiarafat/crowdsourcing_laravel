@@ -36,8 +36,38 @@ class adminController extends Controller
         return view('admin.dashboard', $dashboardData);
     }
 
-    public function ViewProfile(){
-        return "none";
+    public function ViewProfile($id){
+        if(Session::get('user')->id == $id){
+            $profile_data = User::find($id);
+            return view('admin.profile', [ 'title' => 'Profile', 'data' => $profile_data]);
+        }
+        else{
+            $profile_data = User::find($id);
+            return view('admin.profile', [ 'title' => 'Profile', 'data' => $profile_data]);
+            // return $profile_data;
+        }
+        
+    }
+
+    public function uploadImage($id, Request $req){
+        $img = $req->file('profile_photo');
+
+        if ($img == null) {
+          return back()->with('err','Profile Picture is not updated');
+        }else{
+            
+            $image_name = $img->getClientOriginalName();
+    
+            $img->move(public_path('uploads'), $image_name);
+
+    
+            
+            $user = User::find($id);
+            $user->profile_image =$img->getClientOriginalName();
+            $user->save();
+
+            return back()->with('pic_upload','Profile Picture is updated');
+        }
     }
 
     public function resetPassword(){
@@ -67,5 +97,9 @@ class adminController extends Controller
         }
 
         // return $req->input();
+    }
+
+    public function EditProfile($id, Request $req){
+        return "$id";
     }
 }

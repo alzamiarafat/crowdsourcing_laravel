@@ -14,7 +14,7 @@ class buyerController extends Controller
 {
    public function dashboardIndex(Request $req){
 
-   		$user = $req->session()->get('user');
+        $user = $req->session()->get('user');
     	return view('layout.mainLayout', ['user'=>$user]);
     }
 

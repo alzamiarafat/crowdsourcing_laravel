@@ -26,10 +26,16 @@ Route::post('/reset', [userController::class, 'resetSubmit']);
 // Admin routes
 Route::group(['middleware'=>['sessionCheck']] , function () {
 	Route::get('/admin/dashboard', [adminController::class, 'dashboard'])->name('adminDashboard');
+
 	Route::get('/admin/profileview/{id}', [adminController::class, 'ViewProfile'])->name('profileView');
+	Route::post('/admin/profileview/{id}', [adminController::class, 'uploadImage']);
 
 	Route::get('/reset', [adminController::class, 'resetPassword'])->name('resetPassword');
 	Route::post('/changePassword', [adminController::class, 'changePassword'])->name('changePassword');
+
+	Route::get('/editProfile/{id}', [adminController::class, 'EditProfile'])->name('admin.editProfile');
+	Route::get('/editProfile/{id}', [adminController::class, 'EditProfile'])->name('admin.editProfile');
+
 });
 
 
