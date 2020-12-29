@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Validator;
 
 class adminController extends Controller
 {
@@ -37,19 +38,28 @@ class adminController extends Controller
         return "none";
     }
 
-    public function resetPassword(Request $req){
-
-
+    public function resetPassword(){
 
         $resetPassword_data = [
-            'title' => 'Reset password',
-
+            'title' => 'Reset password'
         ];
         return view('admin.resetPassword', $resetPassword_data);
         // return $id;
     }
 
     public function changePassword(Request $req){
-        return $req->input();
+        $checkValidation = Validator::make($req->all(), [
+            'password' => 'required|min:6|required_with:repassword|same:repassword',
+			'repassword' => 'required|min:6',
+        ]);
+
+        if($checkValidation->fails()){
+    		return redirect()->route('resetPassword')->withErrors($checkValidation);
+        }else{
+            
+            return 'done';
+        }
+
+        // return $req->input();
     }
 }

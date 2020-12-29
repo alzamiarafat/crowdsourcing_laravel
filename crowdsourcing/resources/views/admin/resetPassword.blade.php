@@ -15,11 +15,17 @@
                 @csrf
                 <div class="md-form md-outline">
                     <input type="password" id="newPass" name="password" class="form-control" placeholder="New Password">
+                    @error('password')
+							<span style="color: red; font-size: 14px;">*{{ $message }}</span>
+					@enderror
                     <br>
                 </div>
             
                 <div class="md-form md-outline">
                     <input type="password" id="newPassConfirm" name="repassword" class="form-control" placeholder="Confirm password">
+                    @error('repassword')
+							<span style="color: red; font-size: 14px;">*{{ $message }}</span>
+					@enderror
                     <br>
                 </div>
             
@@ -29,9 +35,9 @@
         
             <div class="d-flex justify-content-between align-items-center mb-2">
         
-            <u><a href="/logout">Back to Log In</a></u>
+            <u><a href="{{ route('logout') }}">Back to Log In</a></u>
         
-            <u><a href="/registration">Register</a></u>
+            <u><a href="{{ route('registration') }}">Register</a></u>
         
             </div>
         
