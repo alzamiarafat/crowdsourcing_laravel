@@ -35,7 +35,7 @@
 			</li>
 		</ul>
 	</li>
-	<a href="">History</a>  |
+	<a href="{{route('history',csrf_token())}}">History</a>  |
 	<a href="#contact">Contact</a>  |
 	<a href="{{route('logout',csrf_token())}}">Log Out</a> 
 	

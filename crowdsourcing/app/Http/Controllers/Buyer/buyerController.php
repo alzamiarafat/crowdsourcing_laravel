@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\PostTable;
 use App\Models\Seller;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -85,7 +86,9 @@ class buyerController extends Controller
         
         // $user = User::find($id);
         $user = $req->session()->get('user');
-        $posts = PostTable::all();
+        $posts = PostTable::where('buyer_id', $user->id)
+        ->get();
+        //echo $posts;
         return view('buyer.post_list', ['posts'=>$posts],['user'=>$user]);
     }
 
@@ -134,9 +137,7 @@ class buyerController extends Controller
         $post->status   = 'Available';
         $post->save();
         
-        $user = $req->session()->get('user');
-        $posts = PostTable::all();
-        return view('buyer.post_list', ['posts'=>$posts],['user'=>$user]);
+        return redirect()->route('post_list');
     }
 
     public function postUnavailable($id,Request $req){
@@ -145,10 +146,11 @@ class buyerController extends Controller
 
         $post->status   = 'Unavailable';
         $post->save();
+        return redirect()->route('post_list');
         
-        $user = $req->session()->get('user');
-        $posts = PostTable::all();
-        return view('buyer.post_list', ['posts'=>$posts],['user'=>$user]);
+        //$user = $req->session()->get('user');
+       // $posts = PostTable::all();
+        //return view('buyer.post_list', ['posts'=>$posts],['user'=>$user]);
     }
 
     public function sellerProfile($id,Request $req){
@@ -158,6 +160,26 @@ class buyerController extends Controller
         
         $user = $req->session()->get('user');
         return view('buyer.seller_profile', ['seller'=>$seller,'user'=>$user],['seller_in_userTable'=>$seller_in_userTable]);
+    }
+
+    public function history(Request $req){
+        
+        //$seller = Seller::find($id);
+        //$seller_in_userTable = User::find($id);
+
+        $user = $req->session()->get('user');
+        //echo $user;
+
+
+        $history = DB::table('user')
+            ->join('post_table', 'user.id', '=', 'post_table.buyer_id')
+            ->join('seller', 'post_table.seller_id', '=', 'seller.seller_id')
+            ->where('user.id',$user->id)
+            //->select('user.*','post_table.*','seller.*')
+            //->select('user.full_name','post_table.title','post_table.status','post_table.post_body','post_table.seller_name','seller.category_name','user.contact','post_table.amount')
+            ->get();
+        //echo $history;
+        return view('buyer.history', ['history'=>$history],['user'=>$user]);
     }
 
     

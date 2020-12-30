@@ -65,6 +65,9 @@ Route::group(['middleware'=>['sessionCheck']], function(){
 
 	Route::get('/seller_profile/{id}', [buyerController::class, 'sellerProfile'])->name('seller_profile');
 
+	Route::get('/history', [buyerController::class, 'history'])->name('history');
+
+
 	//Route::post('/create_post', [buyerController::class, 'createPost']);
 
 
