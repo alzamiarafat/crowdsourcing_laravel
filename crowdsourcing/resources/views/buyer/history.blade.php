@@ -32,7 +32,8 @@
 
                     <td style="  padding: 6px 3px;text-align: center;">
                         
-                        <a href="{{route('post_delete', $history[$i]-> id)}}{{csrf_token()}}">Delete</a> |
+                        <a href="{{route('history_delete', $history[$i]-> id)}}{{csrf_token()}}">Delete</a> |
+                        <a href="{{route('download')}}?{{csrf_token()}}">Download</a>
                         
                     </td>
                  </tr> 

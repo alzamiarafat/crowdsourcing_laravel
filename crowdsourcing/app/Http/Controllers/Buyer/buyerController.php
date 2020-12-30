@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\PostTable;
 use App\Models\Seller;
 use Illuminate\Support\Facades\DB;
-
+use PDF;
 
 
 class buyerController extends Controller
@@ -180,6 +180,19 @@ class buyerController extends Controller
             ->get();
         //echo $history;
         return view('buyer.history', ['history'=>$history],['user'=>$user]);
+    }
+
+    public function download(Request $req){
+        
+        $user = $req->session()->get('user');
+        $history = DB::table('user')
+            ->join('post_table', 'user.id', '=', 'post_table.buyer_id')
+            ->join('seller', 'post_table.seller_id', '=', 'seller.seller_id')
+            ->where('user.id',$user->id)
+            ->get();
+
+        $pdf= PDF::loadview('buyer.pdf',compact('history'));
+        return $pdf->('history.pdf');
     }
 
     

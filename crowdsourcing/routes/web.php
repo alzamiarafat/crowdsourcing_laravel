@@ -67,6 +67,11 @@ Route::group(['middleware'=>['sessionCheck']], function(){
 
 	Route::get('/history', [buyerController::class, 'history'])->name('history');
 
+	Route::get('/history_delete', [buyerController::class, 'history'])->name('history_delete');
+
+	Route::get('/download', [buyerController::class, 'download'])->name('download');
+
+
 
 	//Route::post('/create_post', [buyerController::class, 'createPost']);
 
