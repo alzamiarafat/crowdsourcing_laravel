@@ -192,7 +192,7 @@ class buyerController extends Controller
             ->get();
 
         $pdf= PDF::loadview('buyer.pdf',compact('history'));
-        return $pdf->('history.pdf');
+        return $pdf->download('history.pdf');
     }
 
     
