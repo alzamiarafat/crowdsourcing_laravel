@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdminHistory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -123,5 +124,30 @@ class adminController extends Controller
                     ]);
             
         return redirect()->route('profileView', $id);
+    }
+
+    public function deleteUser($id){
+        $data = [
+            'title' => 'Sure',
+            'opearation' => 'Delete',
+            'id' => $id
+        ];
+        return view('admin.sure', $data);
+    }
+
+    public function deleteSure($id){
+        $history = new AdminHistory();
+
+        $history->whos_id = Session::get('user')->id;
+        $history->operation = 'delete';
+        $history->whome_id = $id;
+
+        $history->save();
+
+        DB::table('user')
+                    ->where('id', $id)
+                    ->delete();
+
+        return redirect()->route('adminDashboard');
     }
 }
