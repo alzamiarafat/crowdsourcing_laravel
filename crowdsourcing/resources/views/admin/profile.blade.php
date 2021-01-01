@@ -30,7 +30,7 @@
                     @if ($data->user_roll == 'buyer' || $data->user_roll == 'seller')
                         <a href="{{ route('adminDashboard') }}" class="btn btn-primary">Back</a>
                         <a href="" class="btn btn-secondary">Message</a>
-                        <a href="" class="btn btn-danger">Delete {{ $data->username }}</a>
+                        <a href="{{ route('delete-user', $data->id) }}" class="btn btn-danger">Delete {{ $data->username }}</a>
                     @endif
                 </div>
 
@@ -49,6 +49,9 @@
                             <br><br>
                             
                             <button type="submit" class="btn btn-outline-success btn-sm">Upload</button>
+                        @elseif($data->user_roll == 'buyer' || $data->user_roll == 'seller')
+                            <br>
+                            <a href="" class="btn btn-success">Show {{ Str::ucfirst($data->username) }}'s History</a>
                         @endif
                     </div>
                 </form>

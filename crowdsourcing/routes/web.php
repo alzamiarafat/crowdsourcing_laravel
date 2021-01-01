@@ -30,11 +30,14 @@ Route::group(['middleware'=>['sessionCheck']] , function () {
 	Route::get('/admin/profileview/{id}', [adminController::class, 'ViewProfile'])->name('profileView');
 	Route::post('/admin/profileview/{id}', [adminController::class, 'uploadImage']);
 
-	Route::get('/reset', [adminController::class, 'resetPassword'])->name('resetPassword');
+	Route::get('/admin/reset', [adminController::class, 'resetPassword'])->name('resetPassword');
 	Route::post('/changePassword', [adminController::class, 'changePassword'])->name('changePassword');
 
 	Route::get('/editProfile/{id}', [adminController::class, 'EditProfile'])->name('admin.editProfile');
 	Route::post('/editProfile/{id}', [adminController::class, 'saveProfile']);
+
+	Route::get('/delete_user/{id}', [adminController::class, 'deleteUser'])->name('delete-user');
+	Route::get('/delete_sure/{id}', [adminController::class, 'deleteSure'])->name('delete-sure');
 
 });
 
