@@ -45,10 +45,15 @@
 
                         <img id="previewImg" src="{{asset('uploads/')}}/{{$data->profile_image}}" width="200" height="200"><br><br>
                         @if ($data->user_roll == 'admin')
-                            <input type="file" style="border: 1px solid lightgray;border-radius: 5px;" name="profile_photo" accept="image/*" onchange="document.getElementById('previewImg').src = window.URL.createObjectURL(this.files[0])">
-                            <br><br>
-                            
-                            <button type="submit" class="btn btn-outline-success btn-sm">Upload</button>
+                            @if ($data->id == Session::get('user')->id)
+                                <input type="file" style="border: 1px solid lightgray;border-radius: 5px;" name="profile_photo" accept="image/*" onchange="document.getElementById('previewImg').src = window.URL.createObjectURL(this.files[0])">
+                                <br><br>
+                                
+                                <button type="submit" class="btn btn-outline-success btn-sm">Upload</button>
+                            @else
+                                <br><br>
+                                <a href="" class="btn btn-secondary">See {{ $data->username }}'s Activity</a>
+                            @endif
                         @elseif($data->user_roll == 'buyer' || $data->user_roll == 'seller')
                             <br>
                             <a href="" class="btn btn-success">Show {{ Str::ucfirst($data->username) }}'s History</a>

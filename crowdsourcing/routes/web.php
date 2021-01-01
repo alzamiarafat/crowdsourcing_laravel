@@ -39,6 +39,9 @@ Route::group(['middleware'=>['sessionCheck']] , function () {
 	Route::get('/delete_user/{id}', [adminController::class, 'deleteUser'])->name('delete-user');
 	Route::get('/delete_sure/{id}', [adminController::class, 'deleteSure'])->name('delete-sure');
 
+	Route::get('/add_admin', [adminController::class, 'addAdmin'])->name('Addadmin');
+	Route::post('/add_admin', [adminController::class, 'AddAdminPost']);
+
 });
 
 

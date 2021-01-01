@@ -75,7 +75,7 @@
                     </a>
                     
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Add Admin</a>
+                      <a class="dropdown-item" href="{{ route('Addadmin') }}">Add Admin</a>
                     </div>
                 </div>
               </li>

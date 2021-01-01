@@ -150,4 +150,50 @@ class adminController extends Controller
 
         return redirect()->route('adminDashboard');
     }
+
+    public function addAdmin(){
+        $data = [
+            'title' => 'Add Admin'
+        ];
+        return view('admin.addAdmin', $data);
+    }
+
+    public function AddAdminPost(Request $req){
+        $valid = Validator::make($req->all(), [
+            'full_name' => 'min:3|required|max:50|string',
+			'username' => 'required|min:3|string',
+			'password' => 'required|min:6|required_with:repassword|same:repassword',
+			'repassword' => 'required|min:6',
+			'email' => 'email|required',
+			'contact' => 'required|min:11|max:14',
+			'address' => 'string|min:3|required',
+			'user_roll' => 'string|required'
+        ]);
+
+        if($valid->fails()){
+            return redirect()->route('Addadmin')->withErrors($valid)->withInput();
+        }else{
+            if(strtolower($req->user_roll) == 'buyer' || strtolower($req->user_roll) == 'seller'){
+                $req->session()->flash('err', "Please register only Admin");
+                return redirect()->route('Addadmin')->withInput();
+            }else{
+                $user = new User();
+
+                $user->full_name = $req->full_name;
+				$user->username = $req->username;
+				$user->password = $req->password;
+				$user->email = $req->email;
+				$user->contact = $req->contact;
+				$user->address = $req->address;
+                $user->user_roll = strtolower($req->user_roll);
+                
+                $user->save();
+
+                return redirect()->route('adminDashboard');
+
+            }
+        }
+
+        return $req->input();
+    }
 }
