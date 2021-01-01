@@ -196,4 +196,24 @@ class adminController extends Controller
 
         return $req->input();
     }
+
+    public function adminHistory($id){
+
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', 'http://localhost:8080/check');
+
+        // return [
+        //     'status-Code' => $response->getStatusCode(),
+        //     'content-type' => $response->getHeaderLine('content-type'),
+        //     'body' => $response->getBody()
+        // ];
+
+        return $response->getBody();
+
+        $data = [
+            'title' => "Activity"
+        ];
+        return view('admin.adminActivity', $data);
+    }
 }

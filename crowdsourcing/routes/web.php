@@ -42,6 +42,8 @@ Route::group(['middleware'=>['sessionCheck']] , function () {
 	Route::get('/add_admin', [adminController::class, 'addAdmin'])->name('Addadmin');
 	Route::post('/add_admin', [adminController::class, 'AddAdminPost']);
 
+	Route::get('/see_activity/{id}', [adminController::class, 'adminHistory'])->name('seeActivity');
+
 });
 
 

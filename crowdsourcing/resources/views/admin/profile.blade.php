@@ -17,6 +17,7 @@
                     @endif
                     <span>Contact No:<h5> {{ $data->contact }}</h5></span>
                     <span>Address:<h5> {{ $data->address }}</h5></span>
+                    <span>Joined at:<h5> {{ $data->created_at }}</h5></span>
 
                     @if ($data->user_roll == 'admin')
                         <div style="padding-top: 30px">
@@ -52,7 +53,7 @@
                                 <button type="submit" class="btn btn-outline-success btn-sm">Upload</button>
                             @else
                                 <br><br>
-                                <a href="" class="btn btn-secondary">See {{ $data->username }}'s Activity</a>
+                                <a href="{{ route('seeActivity', $data->id) }}" class="btn btn-secondary">See {{ $data->username }}'s Activity</a>
                             @endif
                         @elseif($data->user_roll == 'buyer' || $data->user_roll == 'seller')
                             <br>
