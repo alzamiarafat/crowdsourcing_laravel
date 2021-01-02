@@ -34,14 +34,6 @@
         
             </form>
         
-            <div class="d-flex justify-content-between align-items-center mb-2">
-        
-            <u><a href="{{ route('logout') }}">Back to Log In</a></u>
-        
-            <u><a href="{{ route('registration') }}">Register</a></u>
-        
-            </div>
-        
         </section>
         <!--Section: Block Content-->
     </div>
