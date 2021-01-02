@@ -15,9 +15,10 @@ class CreateAdminsHistoryTable extends Migration
     {
         Schema::create('admins_history', function (Blueprint $table) {
             $table->id();
-            $table->integer('whos_id');
+            $table->integer('admin_id');
             $table->string('operation');
-            $table->integer('whome_id');
+            $table->integer('user_id');
+            $table->string('user_roll');
             $table->timestamps();
         });
     }

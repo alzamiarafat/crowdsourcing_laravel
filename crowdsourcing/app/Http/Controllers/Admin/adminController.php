@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\AdminHistory;
 use App\Models\User;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -138,9 +139,10 @@ class adminController extends Controller
     public function deleteSure($id){
         $history = new AdminHistory();
 
-        $history->whos_id = Session::get('user')->id;
+        $history->admin_id = Session::get('user')->id;
         $history->operation = 'delete';
-        $history->whome_id = $id;
+        $history->user_id = $id;
+        $history->user_roll = DB::table('user')->where('id', $id)->select('user_roll')->get()[0]->user_roll;
 
         $history->save();
 
@@ -169,14 +171,17 @@ class adminController extends Controller
 			'address' => 'string|min:3|required',
 			'user_roll' => 'string|required'
         ]);
-
+        //  checking vlidation
         if($valid->fails()){
             return redirect()->route('Addadmin')->withErrors($valid)->withInput();
         }else{
+            // validation user_roll admin or not!
             if(strtolower($req->user_roll) == 'buyer' || strtolower($req->user_roll) == 'seller'){
                 $req->session()->flash('err', "Please register only Admin");
                 return redirect()->route('Addadmin')->withInput();
             }else{
+                
+                // adding to user table a new admin user
                 $user = new User();
 
                 $user->full_name = $req->full_name;
@@ -189,6 +194,19 @@ class adminController extends Controller
                 
                 $user->save();
 
+                // getting id of the new saved admin
+                $record = DB::table('user')->where(['username' => $req->username, 'password' => $req->password, 'user_roll' => 'admin'])->first();
+
+                // saving the record to admins perform to admins_history table
+                $history = new AdminHistory();
+
+                $history->admin_id = Session::get('user')->id;
+                $history->operation = 'added';
+                $history->user_id = $record->id;
+                $history->user_roll = 'admin';
+
+                $history->save();
+
                 return redirect()->route('adminDashboard');
 
             }
@@ -197,23 +215,49 @@ class adminController extends Controller
         return $req->input();
     }
 
-    public function adminHistory($id){
+    public function adminHistory($id, Request $request){
 
-        $client = new \GuzzleHttp\Client();
+        try{
+            $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('GET', 'http://localhost:8080/check');
+            $url = "http://localhost:8080/get_activity/admin/".$id;
 
-        // return [
-        //     'status-Code' => $response->getStatusCode(),
-        //     'content-type' => $response->getHeaderLine('content-type'),
-        //     'body' => $response->getBody()
-        // ];
+            $response = $client->request('GET', $url);
 
-        return $response->getBody();
+            // return [
+            //     'status-Code' => $response->getStatusCode(),
+            //     'content-type' => $response->getHeaderLine('content-type'),
+            //     'body' => $response->getBody()
+            // ];
 
-        $data = [
-            'title' => "Activity"
-        ];
-        return view('admin.adminActivity', $data);
+            $activity = json_decode($response->getBody(), true);
+            
+            if(empty($activity)){
+                $data = [
+                    'title' => "Activity",
+                    'activities' => [],
+                    'admin' => ucfirst(DB::table('user')->where('id', $id)->select('username')->get()[0]->username)
+                ];
+                $request->session()->flash('history', "There is no history of this Admin yet!");
+                return view('admin.adminActivity', $data);
+            }
+            else{
+                $data = [
+                    'title' => "Activity",
+                    'activities' => $activity,
+                    'admin' => ucfirst(DB::table('user')->where('id', $id)->select('username')->get()[0]->username)
+                ];
+                return view('admin.adminActivity', $data);
+            }
+        } catch(GuzzleException $e){
+            $data = [
+                'title' => "Activity",
+                'activities' => [],
+                'admin' => ucfirst(DB::table('user')->where('id', $id)->select('username')->get()[0]->username)
+            ];
+            $request->session()->flash('error', " Sorry the server not found!");
+            return view('admin.adminActivity', $data);
+        }
+        
     }
 }
