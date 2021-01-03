@@ -79,8 +79,10 @@ Route::group(['middleware'=>['sessionCheck']], function(){
 
 	Route::get('/download', [buyerController::class, 'download'])->name('download');
 
-	Route::get('/search', [buyerController::class, 'search']);
-	Route::post('/search', [buyerController::class, 'searchShow'])->name('search');;
+	Route::get('/search', [buyerController::class, 'search'])->name('search');
+
+	//Route::get('/search_result/{id', [buyerController::class, 'searchResult'])->name('search_result');
+	 Route::post('/search', [buyerController::class, 'searchResult']);
 
 
 
