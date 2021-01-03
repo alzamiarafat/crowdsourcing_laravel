@@ -18,6 +18,12 @@ app.get('/check', (req, res) => {
 	});
 });
 
+app.get('/search', (req, res) => {
+	res.json({
+		'Data' : 'Data send from guzzleHttp'
+	});
+});
+
 app.listen(port, (error) => {
 	console.log('Server started at '+port);
 });

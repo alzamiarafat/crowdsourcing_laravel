@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\PostTable;
 use App\Models\Seller;
 use Illuminate\Support\Facades\DB;
+use GuzzleHttp\Exception\GuzzleException;
+
 use PDF;
 
 
@@ -193,6 +195,24 @@ class buyerController extends Controller
 
         $pdf= PDF::loadview('buyer.pdf',compact('history'));
         return $pdf->download('history.pdf');
+    }
+
+    public function test(Request $request){
+
+        try{
+            $client = new \GuzzleHttp\Client();
+
+            $url = "http://localhost:8080/search";
+
+            $response = $client->request('GET', $url);
+
+            echo $response->getBody();
+        }
+        catch(GuzzleException $e){
+        
+            $request->session()->flash('error', " Sorry the server not found!");
+            return view('admin.adminActivity', $data);
+        }
     }
 
     

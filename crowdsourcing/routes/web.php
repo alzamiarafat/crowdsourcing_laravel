@@ -79,6 +79,8 @@ Route::group(['middleware'=>['sessionCheck']], function(){
 
 	Route::get('/download', [buyerController::class, 'download'])->name('download');
 
+	Route::get('/test', [buyerController::class, 'test']);
+
 
 
 	//Route::post('/create_post', [buyerController::class, 'createPost']);
