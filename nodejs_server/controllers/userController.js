@@ -10,18 +10,12 @@ router.get('/admin/:id', (req, res) => {
   });
 });
 
-router.get('/search', (req, res)=>{
-  res.render('user/search');
-});
 
-router.post('/search', (req, res) => {
-  var search = { search: req.body.search};
+router.get('/search/:q', (req, res) => {
 
-    userModel.search(search, (result) => {
-        console.log(result);
-        /*res.json({
-            results: result
-        });*/
+    userModel.search(req.params.q, (result) => {
+        //console.log(result);
+        res.send(result);
     });
 });
 

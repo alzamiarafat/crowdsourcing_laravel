@@ -161,6 +161,7 @@ class buyerController extends Controller
         $seller_in_userTable = User::find($id);
         
         $user = $req->session()->get('user');
+        //echo ['suer'=>$user];
         return view('buyer.seller_profile', ['seller'=>$seller,'user'=>$user],['seller_in_userTable'=>$seller_in_userTable]);
     }
 
@@ -197,8 +198,11 @@ class buyerController extends Controller
         return $pdf->download('history.pdf');
     }
 
+
+
     public function search(Request $req)
     {
+
      $user = $req->session()->get('user');
      if($req->has('q')){
          $q=$req->q;
@@ -210,25 +214,39 @@ class buyerController extends Controller
         
     }
 
-    public function searchShow(Request $request){
+    // public function index(Request $req)
+    // {
 
+    //  $user = $req->session()->get('user');
+    //  $searchItem= $req->searchItem;
+    //     return view('buyer.search', ['user'=>$user]);
+    
+        
+    // }
 
-       /* return response()->json(['success'=>'Added new records.']);*/
+     public function searchResult(Request $req){
 
-        /*try{
+         $user = $req->session()->get('user');
+        $searchItem= $req->searchItem;
+
+        
+    //     / return response()->json(['success'=>'Added new records.']);
+
+        try{
             $client = new \GuzzleHttp\Client();
 
-            $url = "http://localhost:8080/search";
+            $url = "http://localhost:8080/get_activity/search/".$searchItem;
 
-            $response = $client->request('POST', $url);
+            $response = $client->request('GET', $url);
 
-            echo $response->getBody();
+            $a= $response->getBody();
         }
         catch(GuzzleException $e){
         
-            $request->session()->flash('error', " Sorry the server not found!");
-            return view('admin.adminActivity', $data);
-        }*/
+            $req->session()->flash('error', " Sorry the server not found!");
+            return view('buyer.search', ['user'=>$user]);
+            
+        }
     }
 
     
