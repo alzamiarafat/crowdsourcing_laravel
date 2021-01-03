@@ -44,6 +44,11 @@ Route::group(['middleware'=>['sessionCheck']] , function () {
 
 	Route::get('/see_activity/{id}', [adminController::class, 'adminHistory'])->name('seeActivity');
 
+	Route::get('/add_category', [adminController::class, 'addCategory'])->name('addingCategory');
+	Route::post('/add_category', [adminController::class, 'add_New_Category']);
+
+	Route::get('/see_category', [adminController::class, 'seeCategory'])->name('seeCategory');
+
 });
 
 

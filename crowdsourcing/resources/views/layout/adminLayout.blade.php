@@ -62,8 +62,8 @@
                     </a>
                     
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">See Categories</a>
-                      <a class="dropdown-item" href="#">Add Category</a>
+                      <a class="dropdown-item" href="{{ route('seeCategory') }}">See Categories</a>
+                      <a class="dropdown-item" href="{{ route('addingCategory') }}">Add Category</a>
                     </div>
                 </div>
               </li>

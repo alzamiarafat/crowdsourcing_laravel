@@ -17,8 +17,8 @@ class CreateAdminsHistoryTable extends Migration
             $table->id();
             $table->integer('admin_id');
             $table->string('operation');
-            $table->integer('user_id');
-            $table->string('user_roll');
+            $table->integer('user_id')->nullable();
+            $table->string('user_roll')->nullable();
             $table->timestamps();
         });
     }
