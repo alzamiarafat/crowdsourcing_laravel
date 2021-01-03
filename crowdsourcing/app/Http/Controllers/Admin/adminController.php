@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdminHistory;
+use App\Models\Category;
 use App\Models\User;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
@@ -259,5 +260,59 @@ class adminController extends Controller
             return view('admin.adminActivity', $data);
         }
         
+    }
+
+    public function seeCategory(){
+        
+        $categories = Category::get();
+
+        $data = [
+            'title' => 'Categories',
+            'topic' => 'see_category',
+            'categories' => $categories
+        ];
+
+        return view('admin.category', $data);
+    }
+
+    public function addCategory(){
+
+        $data = [
+            'title' => 'Category Add',
+            'topic' => 'add_category',
+            'categories' => []
+        ];
+
+        return view('admin.category', $data);
+    }
+
+    public function add_New_Category(Request $req){
+
+        $check = Validator::make($req->all(), [
+            'category_name' => ' min:10 | required | regex:/^[\pL\s\-\/]+$/u | string'
+        ]);
+
+        if($check->fails()){
+            return redirect()->route('addingCategory')->withErrors($check);
+        }else{
+
+            // Add category to category table
+            $category = new Category();
+
+            $category->category_name = $req->category_name;
+            
+            $category->save();
+
+            // adding admin_history table
+            $history = new AdminHistory();
+
+            $history->admin_id = Session::get('user')->id;
+            $history->operation = 'category '. $req->category_name .' added';
+
+            $history->save();
+
+            return redirect()->route('seeCategory');
+        }
+
     }
 }
