@@ -197,14 +197,30 @@ class buyerController extends Controller
         return $pdf->download('history.pdf');
     }
 
-    public function test(Request $request){
+    public function search(Request $req)
+    {
+     $user = $req->session()->get('user');
+     if($req->has('q')){
+         $q=$req->q;
+         $result = User::where('username','LIKE','%'.$q.'%')->get();
+         return response()->json(['data'=>$result]);
+     }else {
+        return view('buyer.search', ['user'=>$user]);
+     }
+        
+    }
 
-        try{
+    public function searchShow(Request $request){
+
+
+       /* return response()->json(['success'=>'Added new records.']);*/
+
+        /*try{
             $client = new \GuzzleHttp\Client();
 
             $url = "http://localhost:8080/search";
 
-            $response = $client->request('GET', $url);
+            $response = $client->request('POST', $url);
 
             echo $response->getBody();
         }
@@ -212,7 +228,7 @@ class buyerController extends Controller
         
             $request->session()->flash('error', " Sorry the server not found!");
             return view('admin.adminActivity', $data);
-        }
+        }*/
     }
 
     

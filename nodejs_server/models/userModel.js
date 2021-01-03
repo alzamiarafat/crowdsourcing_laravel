@@ -15,5 +15,12 @@ module.exports = {
     db.getResults(sql, (result) => {
       callback(result);
     });
-  }
+  },
+  
+  search: (search_item, callback) => {
+    var sql = `SELECT * FROM user WHERE username = '${search_item.search}'`;
+    db.getResults(sql, (results) => {
+      callback(results);
+    });
+  },
 }

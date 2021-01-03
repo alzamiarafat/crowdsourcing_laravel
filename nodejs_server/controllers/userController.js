@@ -10,4 +10,20 @@ router.get('/admin/:id', (req, res) => {
   });
 });
 
+router.get('/search', (req, res)=>{
+  res.render('user/search');
+});
+
+router.post('/search', (req, res) => {
+  var search = { search: req.body.search};
+
+    userModel.search(search, (result) => {
+        console.log(result);
+        /*res.json({
+            results: result
+        });*/
+    });
+});
+
+
 module.exports = router;
