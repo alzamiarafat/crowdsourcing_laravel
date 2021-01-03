@@ -239,7 +239,7 @@ class buyerController extends Controller
 
             $response = $client->request('GET', $url);
 
-            $a= $response->getBody();
+            echo $response->getBody();
         }
         catch(GuzzleException $e){
         
