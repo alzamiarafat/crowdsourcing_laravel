@@ -3,41 +3,39 @@
 
 @section('content')
 @csrf
-	<div class="container" style="background-color: #EEEEEE; padding: 50px 50px">
-		<div class="row">
-<div class="col-7">
+<div class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-lg-3 col-6">
                 <div style="margin-left: 60px">
-                    <h3 style="color: orange"> {{ ucfirst($user->user_roll) }}</h3>
+                    <h3 style="color: orange"> {{ ucfirst($profile->user_roll) }}</h3>
                     <br>
-                    <span>User name:<h5> {{ $user->username }}</h5></span>
-                    <span>Email:<h5> {{ $user->email }}</h5></span>
-                    @if ($user->user_roll == 'admin')
-                        <span>Password: <h5>{{ $user->password }}</h5></span>
-                    @endif
-                    <span>Contact No:<h5> {{ $user->contact }}</h5></span>
-                    <span>Address:<h5> {{ $user->address }}</h5></span>
-                    <span>Joined at:<h5> {{ $user->created_at }}</h5></span>
+                    <span>User name:<h5> {{ $profile->username }}</h5></span>
+                    <span>Email:<h5> {{ $profile->email }}</h5></span>
+                    <span>Contact No:<h5> {{ $profile->contact }}</h5></span>
+                    <span>Address:<h5> {{ $profile->address }}</h5></span>
+                    
 
-                    @if ($user->user_roll == 'admin')
-                        <div style="padding-top: 30px">
-                            <a href="{{ route('adminDashboard') }}" class="btn btn-primary">Back</a>
+                
+                       
 
-                            <a href="{{ route('admin.editProfile', Session::get('user')->id) }}" type="button" class="btn btn-secondary">Edit Profile</a>
-                        </div>
-                    @endif
+                            <a href="{{route('edit_profile', $profile['id'])}}" type="button" class="btn btn-secondary">Edit Profile</a>
+    
+                    
                     <br><br>
                 </div>
 
             </div>
 
 			<div class="col-5">
-                <h1>{{ $user->full_name }}</h1>
+                <h1>{{ $profile->full_name }}</h1>
 
-               <form method="POST" action="{{route('profile', $user['id'])}}" enctype="multipart/form-data">
+               <form method="POST" action="{{route('profile', $profile['id'])}}" enctype="multipart/form-data">
                     @csrf                    
                     <div style="margin-top: 30px">
 
-                        <img id="previewImg" src="{{asset('uploads/')}}/{{$user->profile_image}}" width="200" height="200"><br><br>
+                        <img id="previewImg" src="{{asset('uploads/')}}/{{$profile->profile_image}}" width="200" height="200"><br><br>
 				<input type="file" style="border: 1px solid lightgray;border-radius: 5px;" name="profile_photo" accept="image/*" 		onchange="document.getElementById('previewImg').src = window.URL.createObjectURL(this.files[0])">
 				<br><br>
 				
@@ -46,8 +44,7 @@
                     </div>
                 </form>
             </div>
-				
-		</form>
+				</div><div style="height: 150px"></div>
 		
 
 	
