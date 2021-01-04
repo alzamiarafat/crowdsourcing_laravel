@@ -56,6 +56,8 @@ Route::group(['middleware'=>['sessionCheck']] , function () {
 
 	Route::get('/downloadPDF', [adminController::class, 'downladPDF'])->name('profileDownload');
 
+	Route::get('/search-name', [adminController::class, 'searchFunction'])->name('search-name');
+
 });
 
 
