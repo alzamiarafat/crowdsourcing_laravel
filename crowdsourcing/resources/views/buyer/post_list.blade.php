@@ -3,30 +3,38 @@
 
 @section('content')
 @csrf
-    <div>
+<div class="container" style="background-color: #EEEEEE; padding: 50px 40px">
+    <div class="d-flex justify-content-center">
         <table class="table table-borderless table-data3">
             <thead style="background-color: #404040;text-align: center;">
-                <tr>
-                    <th style="  padding: 6px 10px;">ID</th>
-                    <th style="  padding: 6px 10px;">Title</th>
-                    <th style="  padding: 6px 10px;">Status</th>
-                    <th style="  padding: 6px 10px;">Description</th>
-                    <th style="  padding: 6px 10px;">Price</th>
-                    <th style="  padding: 6px 10px;">action</th>
+                
+                <tr style=" color: white">
+                    <th >ID</th>
+                    <th >Title</th>
+                    <th >Status</th>
+                    <th >Description</th>
+                    <th >Price</th>
+                    <th >action</th>
                 </tr>
             </thead>
             <tbody>
         		@for($i=0; $i < count($posts); $i++)
-                <tr>
-                    <td style="  padding: 6px 3px;text-align: center;">{{$posts[$i]['id']}}</td>
-                    <td style="  padding: 6px 3px;text-align: center;">{{$posts[$i]['title']}}</td>
-                    <td style="  padding: 6px 3px;text-align: center;">{{$posts[$i]['status']}}</td>
-                    <td style="  padding: 6px 3px;text-align: center;">{{$posts[$i]['post_body']}}</td>
-                    <td style="  padding: 6px 3px;text-align: center;">{{$posts[$i]['amount']}}</td>
-                    <td style="  padding: 6px 3px;text-align: center;">
+                <tr style="background-color: white">
+                    <td style="  padding: 35px 6px;text-align: center;">{{$posts[$i]['id']}}</td>
+                    <td style="  padding: 30px 6px;text-align: center;">{{$posts[$i]['title']}}</td>
+
+                    @if($posts[$i]['status']== 'Available')
+
+                    <td style="  padding: 30px 6px;text-align: center; color: green">{{$posts[$i]['status']}}</td>
+                    @else
+                    <td style="  padding: 30px 6px;text-align: center; color: red">{{$posts[$i]['status']}}</td>
+                    @endif
+                    <td style="  padding: 30px 3px;text-align: center;">{{$posts[$i]['post_body']}}</td>
+                    <td style="  padding: 30px 6px;text-align: center;">{{$posts[$i]['amount']}}</td>
+                    <td style="  padding: 30px 0px;text-align: center;">
                         <a href="/buyer/edit_post/<%= pst.id %>"> <button type="button" class="btn btn-outline-info" style="height: 32px;">Edit</button></a> |
-                        <a href="{{route('post_delete', $posts[$i]['id'])}}{{csrf_token()}}">Delete</a> |
-                        <a href="{{route('post_available', $posts[$i]['id'])}}{{csrf_token()}}"><button type="button" class="btn btn-outline-success btn-sm">Available</button> |</a>
+                        <a href="{{route('post_delete', $posts[$i]['id'])}}{{csrf_token()}}"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></a>
+                        <a href="{{route('post_available', $posts[$i]['id'])}}{{csrf_token()}}"><button type="button" class="btn btn-outline-success btn-sm">Available</button></a> |
                         <a href="{{route('post_unavailable', $posts[$i]['id'])}}{{csrf_token()}}"><button type="button" class="btn btn-outline-warning btn-sm">Unavailable</button></a>
                     </td>
                  </tr> 

@@ -3,82 +3,39 @@
 
 @section('content')
 @csrf
-	<div >
-		<fieldset >
-		<legend>Seller Profile</legend>
 
-		<table style="position: relative;left: 20px;">
+    
+    <div class="container" style="background-color: #EEEEEE; padding: 50px 50px">
+        <div class="row">
+            {{-- First column --}}
+            <div class="col-7">
+                <div style="margin-left: 60px">
+                    <h3 style="color: orange"> {{ucfirst($seller_in_userTable->user_roll)}} </h3>
+                    <br>
+                    
+                    <span>Username:<h5> {{$seller_in_userTable->username}}</h5></span>
+                    
+                    <span>Contact No:<h5> {{$seller_in_userTable->contact}}</h5></span>
+                    <span>Email:<h5> {{$seller_in_userTable->email}}</h5></span>
+                    <span>Category:<h5> {{$seller->category_name}}</h5></span>
+                    <span>Project Title:<h5> {{$seller->project_title}}</h5></span>
+                    <span>Project Description:<h5> {{$seller->project_body}}</h5></span>   
+          
+                </div>
 
-			<tr >
-				<td style="width: 40%; height: 40px;">Name</td>
-				<td >{{$seller_in_userTable->full_name}}</td>
-			</tr>
-				
-			<tr>
-				<td style="width: 40%; height: 40px;">Username</td>
-				<td>{{$seller_in_userTable->username}}</td>
-			</tr>
-			
+            </div>
+            {{-- Second column --}}
+            <div class="col-5">
+                <h1>{{$seller_in_userTable->full_name}}</h1>
+                
+                    <div style="margin-top: 30px">
 
-			<tr>
-				<td style="width: 40%; height: 40px;">Contact</td>
-				<td>{{$seller_in_userTable->contact}}</td>
-			</tr>
-
-			<tr>
-				<td style="width: 40%; height: 40px;">Email</td>
-				<td>{{$seller_in_userTable->email}}</td>
-			</tr>
-
-			<tr>
-				<td style="width: 40%; height: 40px;">Category</td>
-				<td>{{$seller->category_name}}</td>
-			</tr>
-
-			<tr>
-				<td style="width: 40%; height: 40px;">Project Title</td>
-				<td>{{$seller->project_title}}</td>
-			</tr>
-
-			<tr>
-				<td style="width: 40%; height: 40px;">Project Description</td>
-				<td>{{$seller->project_body}}</td>
-			</tr>
-
-			<tr>
-				<td></td>
-			</tr>
-
-		</table>
-
-			
-			<div style="position: absolute; left: 30%; top: 120px">
-
-				<img id="previewImg" src="{{asset('uploads/')}}/{{$seller_in_userTable->profile_image}}" width="200" height="200"><br><br>
-				
-				
-				
-			</div>
-				
-		</form>
-		
-	</fieldset>
-	</div>
+                        <img id="previewImg" src="{{asset('uploads/')}}/{{$seller_in_userTable->profile_image}}" width="200" height="200"><br><br>
+                       
+                    </div>
+                
+            </div>
+        </div>
+    </div>
 	
-	@if(Session::has('pic_upload'))
-
-		<script>
-			swal("Uploaded!", "Profile Picture is updated", "success");
-		</script>
-
-	@elseif(Session::has('edit_profile'))
-		<script>
-			swal("Success!", "Your Profile is updated", "success");
-		</script>
-		
-	@elseif(Session::has('err'))
-		<script>
-			swal("Error!", "Please select one!", "error");
-		</script>
-	@endif
 @endsection
