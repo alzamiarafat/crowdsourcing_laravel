@@ -57,7 +57,7 @@
                             @endif
                         @elseif($data->user_roll == 'buyer' || $data->user_roll == 'seller')
                             <br>
-                            <a href="" class="btn btn-success">Show {{ Str::ucfirst($data->username) }}'s History</a>
+                            <a href="{{ route('History', $data->id) }}" class="btn btn-success">Show {{ Str::ucfirst($data->username) }}'s History</a>
                         @endif
                     </div>
                 </form>

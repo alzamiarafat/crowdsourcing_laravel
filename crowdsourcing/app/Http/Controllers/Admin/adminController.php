@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AdminHistory;
 use App\Models\Category;
 use App\Models\User;
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -350,5 +351,47 @@ class adminController extends Controller
             'sellers' => $getSellers
         ];
         return view('admin.list', $data);
+    }
+
+    public function History($id){
+
+        $user = User::find($id);
+
+        if($user->user_roll == 'buyer'){
+            try{
+
+                // join query
+                $history = DB::table('user')
+                ->join('post_table', 'user.id', '=', 'post_table.buyer_id')
+                ->join('account', 'user.id', '=', 'account.user_id')
+                ->join('seller', 'seller.seller_id', '=', 'post_table.seller_id')
+                ->where('user.id', $id)
+                ->select('user.full_name', 'user.email', 'user.contact', 'user.address', 'post_table.title', 'post_table.post_body', 'post_table.amount', 'seller.seller_name', 'seller.seller_id', 'seller.category_name', 'seller.contact', 'seller.created_at', 'account.net_balance', 'account.deposit', 'account.withdraw')
+                ->get();
+            
+                
+                $data = [
+                    'title' => 'History',
+                    'topic' => $user->user_roll,
+                    'who' => $history[0]->full_name,
+                    'histories' => $history
+                ];
+                return view('admin.history', $data);
+            }
+            catch(Exception $e){
+                $data = [
+                    'title' => 'History',
+                    'topic' => $user->user_roll,
+                    'who' => $user,
+                    'histories' => [],
+                ];
+                // return $data['who']->full_name;
+                return view('admin.history', $data);
+            }
+        }
+        elseif($user->user_roll == 'seller'){
+            
+        }        
+
     }
 }

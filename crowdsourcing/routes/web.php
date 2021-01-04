@@ -4,8 +4,7 @@ use App\Http\Controllers\Admin\adminController;
 use Illuminate\Support\Facades\Route;
 use App\HTTP\Controllers\userController;
 use App\HTTP\Controllers\Buyer\buyerController;
-
-
+use FontLib\Table\Type\name;
 
 Route::get('/', function () {
     return view('homepage', [ 'title' => "Home | Crowdsourcing"]);
@@ -52,6 +51,8 @@ Route::group(['middleware'=>['sessionCheck']] , function () {
 	Route::get('/admin_list', [adminController::class, 'adminList'])->name('admins');
 	Route::get('/buyer_list', [adminController::class, 'buyerList'])->name('buyers');
 	Route::get('/seller_list', [adminController::class, 'sellerList'])->name('sellerslist');
+
+	Route::get('/see_history/{id}', [adminController::class, 'History'])->name('History');
 
 });
 
