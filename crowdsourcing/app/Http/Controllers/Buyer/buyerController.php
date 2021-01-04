@@ -16,8 +16,15 @@ use PDF;
 class buyerController extends Controller
 {
    public function dashboardIndex(Request $req){
+        $posts = DB::table('post_table')
+            ->join('user', 'post_table.buyer_id', '=', 'user.id')
+            ->get();
 
-    	return view('layout.mainLayout', ['title'=>'Dashboard']);
+
+        // $posts= PostTable::all();
+        //echo $posts;
+
+    	return view('buyer.dashboard',['posts'=>$posts]);
     }
 
     public function profile($id,Request $req){
