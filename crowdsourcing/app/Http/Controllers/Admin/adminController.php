@@ -430,4 +430,17 @@ class adminController extends Controller
 
         // return view('admin.profileinformation', ['data' => $data]);
     }
+
+    public function searchFunction(Request $req){
+
+        if($req->has('q')){
+            $q = $req->q;
+            $result = User::where('username','LIKE','%'.$q.'%')->get();
+            return response()->json(['data' => $result]);
+        }
+        else{
+            return "not coming";
+        }
+
+    }
 }
