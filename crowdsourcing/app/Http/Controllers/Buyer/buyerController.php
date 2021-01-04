@@ -30,7 +30,7 @@ class buyerController extends Controller
     public function profile($id,Request $req){
     
         $user = User::find($id);
-    	return view('buyer.profile', ['user'=>$user]);
+    	return view('buyer.profile', ['profile'=>$user]);
     }
 
     public function uploadImage($id,Request $req){
@@ -210,7 +210,7 @@ class buyerController extends Controller
 
      if($req->has('q')){
          $q=$req->q;
-         $result = User::where('username','LIKE','%'.$q.'%')->get();
+         $result = User::where('username','LIKE','%'.$q.'%')->orWhere('full_name', 'LIKE','%'.$q.'%')->get();
          return response()->json(['data'=>$result]);
      }else {
         return view('buyer.search');

@@ -1,23 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <title>Search</title>
-</head>
-<body>
-    <fieldset>
+@extends('layout/mainLayout')
+
+
+@section('content')
+@csrf
+<div class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-lg-3 col-6">
+                <div style="margin-left: 60px">
         <legend>Search User</legend>
         <form method="POST" action="">
             @csrf
-        <div class="container">
-            <input type="text" name="searchItem" class ="form-control my-3 search-input" id="mytext" placeholder="Search here">
-            <button name="submit" value="Submit" class="btn btn-secondary">Search</button>
-            <div class="card">
-                <div class="card-header">Search Results</div>
-                <div class="list-group list-group-flush search-result">
+        
+            
+      
+        <input class ="form-control my-3 search-input" type="search" name="searchItem" id="mytext" style="width: 200%" placeholder="Search By Username" aria-label="Search">
+        <div class="input-group-append">
+          <button  name="submit" value="Submit" class="btn btn-success" type="submit" style="position: relative;left: 400px;top: -55px">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    
+            
+                <div class="card-header" style="position: relative;left: 60px;width: 200%">Search Results</div>
+                <div class="list-group list-group-flush search-result" style="position: relative;left: 60px;width: 200%">
 
                 </div>
 
@@ -27,7 +35,9 @@
     </form>
 
 
-    </fieldset>
+  </div>
+</div>
+
 
     <script type="text/javascript">
         $(document).ready(function(){
@@ -47,7 +57,7 @@
                         success: function (res) {
                            var _html = '';
                            $.each(res.data,function (index,data) {
-                              _html+='<li class="list-group-item">'+data.full_name+'</li>';
+                              _html+='<li class="list-group-item">'+data.username+'</li>';
                            });
                            $(".search-result").html(_html);
                             
@@ -57,5 +67,6 @@
             });
         });
     </script>
-</body>
-</html>
+    <div style="padding: 150px 100px"></div>
+
+@endsection

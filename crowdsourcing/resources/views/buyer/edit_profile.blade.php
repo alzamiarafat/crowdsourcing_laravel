@@ -3,7 +3,12 @@
 
 @section('content')
 @csrf
-	<div >
+	<div class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-lg-3 col-6">
+                <div style="margin-left: 60px">
 	
 		<form method="POST" action="{{route('edit_profile', $user['id'])}}" enctype="multipart/form-data">
 			<input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -40,7 +45,7 @@
 		</table>
 				
 		</form>
-		
+		 <div style="padding: 150px 100px"></div>
 	</div>
    
 @endsection
