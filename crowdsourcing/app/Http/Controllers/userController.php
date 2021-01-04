@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Dotenv\Validator as DotenvValidator;
+use Exception;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Validator;
 
 use function PHPSTORM_META\type;
@@ -106,10 +109,43 @@ class userController extends Controller
     }
 
     public function reset(){
-        return view('login.resetPassword');
+        return view('login.resetPassword', ['title' => 'Reset Password']);
     }
 
-    public function resetSubmit(){
-        return redirect()->route('login');
+    public function resetSubmit(Request $req){
+
+		try{
+			$find = User::where('email', $req->email)->get()[0];
+
+			if($find->email == $req->email){
+				$valid = Validator::make($req->all(), [
+					
+					'password' => 'required|min:6|required_with:repassword|same:repassword',
+					'repassword' => 'required|min:6',
+					'email' => 'email|required',
+					
+				]);
+				if($valid->fails()){
+					return redirect()->route('reset')->withErrors($valid);
+				}
+				else{
+					DB::table('user')
+						->where('id', $find->id)
+						->update([
+							'password' => $req->password
+						]);
+					return redirect()->route('login');
+				}
+
+			}else{
+				Session::flash('msg', "Email doesn't matched!");
+				return view('login.resetPassword', ['title' => 'Reset Password']);
+			}
+		}
+		catch(Exception $e){
+			$req->session()->flash('msg', "Email doesn't matched!");
+			return view('login.resetPassword', ['title' => 'Reset Password']);
+		}
+		
     }
 }
