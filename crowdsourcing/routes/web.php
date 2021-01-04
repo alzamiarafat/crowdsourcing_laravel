@@ -49,6 +49,10 @@ Route::group(['middleware'=>['sessionCheck']] , function () {
 
 	Route::get('/see_category', [adminController::class, 'seeCategory'])->name('seeCategory');
 
+	Route::get('/admin_list', [adminController::class, 'adminList'])->name('admins');
+	Route::get('/buyer_list', [adminController::class, 'buyerList'])->name('buyers');
+	Route::get('/seller_list', [adminController::class, 'sellerList'])->name('sellerslist');
+
 });
 
 

@@ -87,9 +87,9 @@
                     </a>
                     
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Admins</a>
-                      <a class="dropdown-item" href="#">Buyers</a>
-                      <a class="dropdown-item" href="#">Sellers</a>
+                      <a class="dropdown-item" href="{{ route('admins') }}">Admins</a>
+                      <a class="dropdown-item" href="{{ route('buyers') }}">Buyers</a>
+                      <a class="dropdown-item" href="{{ route('sellerslist') }}">Sellers</a>
                     </div>
                 </div>
               </li>

@@ -315,4 +315,31 @@ class adminController extends Controller
         }
 
     }
+
+    public function adminList(){
+
+        $data = [
+            'title' => 'Admins List',
+            'topic' => 'admin_list'
+        ];
+        return view('admin.list', $data);
+    }
+
+    public function buyerList(){
+
+        $data = [
+            'title' => 'Buyer List',
+            'topic' => 'buyer_list'
+        ];
+        return view('admin.list', $data);
+    }
+
+    public function sellerList(){
+
+        $data = [
+            'title' => 'Seller List',
+            'topic' => 'seller_list'
+        ];
+        return view('admin.list', $data);
+    }
 }
