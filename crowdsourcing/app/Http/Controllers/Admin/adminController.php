@@ -318,27 +318,36 @@ class adminController extends Controller
 
     public function adminList(){
 
+        $getAdmins = DB::table('user')->where('user_roll', 'admin')->get();
+
+
         $data = [
             'title' => 'Admins List',
-            'topic' => 'admin_list'
+            'topic' => 'admin_list',
+            'admins' => $getAdmins
         ];
         return view('admin.list', $data);
     }
 
     public function buyerList(){
 
+        $getBuyers = DB::table('user')->where('user_roll', 'buyer')->get();
+    
         $data = [
             'title' => 'Buyer List',
-            'topic' => 'buyer_list'
+            'topic' => 'buyer_list',
+            'buyers' => $getBuyers
         ];
         return view('admin.list', $data);
     }
 
     public function sellerList(){
+        $getSellers = DB::table('user')->where('user_roll', 'seller')->get();
 
         $data = [
             'title' => 'Seller List',
-            'topic' => 'seller_list'
+            'topic' => 'seller_list',
+            'sellers' => $getSellers
         ];
         return view('admin.list', $data);
     }

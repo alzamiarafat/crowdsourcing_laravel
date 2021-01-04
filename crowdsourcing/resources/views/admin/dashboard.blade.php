@@ -118,7 +118,7 @@
 
 <div style="height: 50px"></div>
 
-<div style="background-color: black; color: white; text-align: center; padding: 10px 5px" class="container">
+<div style="background-color: black; color: white; text-align: center; padding: 10px 5px">
     <h5>Sellers Lists</h5>
 </div>
 <div class="container scroll">
