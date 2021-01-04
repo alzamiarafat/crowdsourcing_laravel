@@ -12,7 +12,7 @@
                     <br>
                     <span>User name:<h5> {{ $data->username }}</h5></span>
                     <span>Email:<h5> {{ $data->email }}</h5></span>
-                    @if ($data->user_roll == 'admin')
+                    @if ($data->id == Session::get('user')->id)
                         <span>Password: <h5>{{ $data->password }}</h5></span>
                     @endif
                     <span>Contact No:<h5> {{ $data->contact }}</h5></span>
@@ -51,9 +51,12 @@
                                 <br><br>
                                 
                                 <button type="submit" class="btn btn-outline-success btn-sm">Upload</button>
+                                <br><br>
+                                <a href="{{ route('profileDownload') }}" class="btn btn-secondary">Download Information</a>
                             @else
                                 <br><br>
                                 <a href="{{ route('seeActivity', $data->id) }}" class="btn btn-secondary">See {{ $data->username }}'s Activity</a>
+                                
                             @endif
                         @elseif($data->user_roll == 'buyer' || $data->user_roll == 'seller')
                             <br>

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Validator;
+use PDF;
 
 class adminController extends Controller
 {
@@ -418,5 +419,15 @@ class adminController extends Controller
             }
         }        
 
+    }
+
+    public function downladPDF(){
+        $data = Session::get('user');
+
+        $pdf = PDF::loadview('admin.profileInformation', compact('data'));
+
+        return $pdf->download('profile.pdf');
+
+        // return view('admin.profileinformation', ['data' => $data]);
     }
 }

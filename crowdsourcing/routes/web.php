@@ -54,6 +54,8 @@ Route::group(['middleware'=>['sessionCheck']] , function () {
 
 	Route::get('/see_history/{id}', [adminController::class, 'History'])->name('History');
 
+	Route::get('/downloadPDF', [adminController::class, 'downladPDF'])->name('profileDownload');
+
 });
 
 
