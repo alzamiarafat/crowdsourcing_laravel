@@ -390,7 +390,32 @@ class adminController extends Controller
             }
         }
         elseif($user->user_roll == 'seller'){
-            
+            // try Catch
+            try{
+                $history = DB::table('seller')
+                        ->join('user', 'seller.buyer_id', '=', 'user.id')
+                        ->join('post_table', 'post_table.seller_id', '=', 'seller.seller_id')
+                        ->where('seller.seller_id', $id)
+                        ->get();
+                // return $history;
+                $data =[
+                    'title' => 'Historty',
+                    'topic' => $user->user_roll,
+                    'who' => $user,
+                    'histories' => $history
+                ];
+                return view('admin.history', $data);
+            }
+            catch(Exception $e){
+                $data = [
+                    'title' => 'History',
+                    'topic' => $user->user_roll,
+                    'who' => $user,
+                    'histories' => [],
+                ];
+                // return $data['who']->full_name;
+                return view('admin.history', $data);
+            }
         }        
 
     }
