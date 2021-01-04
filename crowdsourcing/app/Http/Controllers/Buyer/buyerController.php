@@ -17,8 +17,7 @@ class buyerController extends Controller
 {
    public function dashboardIndex(Request $req){
 
-        $user = $req->session()->get('user');
-    	return view('layout.mainLayout', ['user'=>$user]);
+    	return view('layout.mainLayout', ['title'=>'Dashboard']);
     }
 
     public function profile($id,Request $req){
@@ -85,28 +84,27 @@ class buyerController extends Controller
         return redirect()->route('profile',$user->id)->with('edit_profile','Your Profile is Updated');
     }
     public function postList(Request $req){
-        
-        // $user = User::find($id);
         $user = $req->session()->get('user');
+        // $user = User::find($id);
         $posts = PostTable::where('buyer_id', $user->id)
         ->get();
         //echo $posts;
-        return view('buyer.post_list', ['posts'=>$posts],['user'=>$user]);
+        return view('buyer.post_list', ['posts'=>$posts]);
     }
 
     public function sellerList(Request $req){
         
         // $user = User::find($id);
-        $user = $req->session()->get('user');
+       
         $sellers = Seller::all();
-        return view('buyer.seller_list', ['sellers'=>$sellers],['user'=>$user]);
+        return view('buyer.seller_list', ['sellers'=>$sellers]);
     }
     
     public function createPostIndex(Request $req){
         
         // $user = User::find($id);
-        $user = $req->session()->get('user');
-        return view('buyer.post_create', ['user'=>$user]);
+        
+        return view('buyer.post_create');
     }
 
     public function createPost(Request $req){
@@ -160,9 +158,9 @@ class buyerController extends Controller
         $seller = Seller::find($id);
         $seller_in_userTable = User::find($id);
         
-        $user = $req->session()->get('user');
+        
         //echo ['suer'=>$user];
-        return view('buyer.seller_profile', ['seller'=>$seller,'user'=>$user],['seller_in_userTable'=>$seller_in_userTable]);
+        return view('buyer.seller_profile', ['seller'=>$seller],['seller_in_userTable'=>$seller_in_userTable]);
     }
 
     public function history(Request $req){
@@ -203,13 +201,12 @@ class buyerController extends Controller
     public function search(Request $req)
     {
 
-     $user = $req->session()->get('user');
      if($req->has('q')){
          $q=$req->q;
          $result = User::where('username','LIKE','%'.$q.'%')->get();
          return response()->json(['data'=>$result]);
      }else {
-        return view('buyer.search', ['user'=>$user]);
+        return view('buyer.search');
      }
         
     }
@@ -226,8 +223,9 @@ class buyerController extends Controller
 
      public function searchResult(Request $req){
 
-         $user = $req->session()->get('user');
+         
         $searchItem= $req->searchItem;
+        echo $searchItem;
 
         
     //     / return response()->json(['success'=>'Added new records.']);
@@ -244,7 +242,7 @@ class buyerController extends Controller
         catch(GuzzleException $e){
         
             $req->session()->flash('error', " Sorry the server not found!");
-            return view('buyer.search', ['user'=>$user]);
+            return view('buyer.search');
             
         }
     }

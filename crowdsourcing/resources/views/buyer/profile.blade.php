@@ -3,68 +3,53 @@
 
 @section('content')
 @csrf
-	<div >
-		<fieldset >
-		<legend>Profile</legend>
+	<div class="container" style="background-color: #EEEEEE; padding: 50px 50px">
+		<div class="row">
+<div class="col-7">
+                <div style="margin-left: 60px">
+                    <h3 style="color: orange"> {{ ucfirst($user->user_roll) }}</h3>
+                    <br>
+                    <span>User name:<h5> {{ $user->username }}</h5></span>
+                    <span>Email:<h5> {{ $user->email }}</h5></span>
+                    @if ($user->user_roll == 'admin')
+                        <span>Password: <h5>{{ $user->password }}</h5></span>
+                    @endif
+                    <span>Contact No:<h5> {{ $user->contact }}</h5></span>
+                    <span>Address:<h5> {{ $user->address }}</h5></span>
+                    <span>Joined at:<h5> {{ $user->created_at }}</h5></span>
 
-		<table style="position: relative;left: 20px;">
-			<tr>
-				<td>ID</td>
-				<td>{{$user->id}}</td>
-			</tr>
+                    @if ($user->user_roll == 'admin')
+                        <div style="padding-top: 30px">
+                            <a href="{{ route('adminDashboard') }}" class="btn btn-primary">Back</a>
 
-			<tr >
-				<td style="width: 40%; height: 40px;">Name</td>
-				<td >{{$user->full_name}}</td>
-			</tr>
-				
-			<tr>
-				<td style="width: 40%; height: 40px;">Username</td>
-				<td>{{$user->username}}</td>
-			</tr>
-			<tr>
-				<td style="width: 40%; height: 40px;">Password</td>
-				<td>{{$user->password}}</td>
-			</tr>
+                            <a href="{{ route('admin.editProfile', Session::get('user')->id) }}" type="button" class="btn btn-secondary">Edit Profile</a>
+                        </div>
+                    @endif
+                    <br><br>
+                </div>
 
-			<tr>
-				<td style="width: 40%; height: 40px;">Address</td>
-				<td>{{$user->address}}</td>
-			</tr>
+            </div>
 
-			<tr>
-				<td style="width: 40%; height: 40px;">Contact</td>
-				<td>{{$user->contact}}</td>
-			</tr>
+			<div class="col-5">
+                <h1>{{ $user->full_name }}</h1>
 
-			<tr>
-				<td style="width: 40%; height: 40px;">Email</td>
-				<td>{{$user->email}}</td>
-			</tr>
+               <form method="POST" action="{{route('profile', $user['id'])}}" enctype="multipart/form-data">
+                    @csrf                    
+                    <div style="margin-top: 30px">
 
-			<tr>
-				<td></td>
-				<td><a href="{{route('edit_profile', $user['id'])}}{{csrf_token()}}"><button type="button" class="btn btn-secondary">Edit Profile</button></a><br><br></td>
-			</tr>
-
-		</table>
-
-		<form method="POST" action="{{route('profile', $user['id'])}}" enctype="multipart/form-data">
-			<input type="hidden" name="_token" value="{{csrf_token()}}">
-			
-			<div style="position: absolute; left: 30%; top: 120px">
-
-				<img id="previewImg" src="{{asset('uploads/')}}/{{$user->profile_image}}" width="200" height="200"><br><br>
+                        <img id="previewImg" src="{{asset('uploads/')}}/{{$user->profile_image}}" width="200" height="200"><br><br>
 				<input type="file" style="border: 1px solid lightgray;border-radius: 5px;" name="profile_photo" accept="image/*" 		onchange="document.getElementById('previewImg').src = window.URL.createObjectURL(this.files[0])">
 				<br><br>
 				
-				<button type="submit" class="btn btn-outline-success btn-sm">Upload</button>
-			</div>
+				<button type="submit" class="btn btn-success btn-sm" style="width: 40%;height: 40px; font-size: 18px">Upload</button>
+                        
+                    </div>
+                </form>
+            </div>
 				
 		</form>
 		
-	</fieldset>
-	</div>
+
 	
 	@if(Session::has('pic_upload'))
 
