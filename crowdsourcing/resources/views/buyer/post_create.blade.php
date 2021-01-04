@@ -12,13 +12,13 @@
         <tr>
             <td>Buyer ID</td>
             <td>
-                <input type="text" name="buyer_id" value="{{$user->id}}" style="background-color: #F0F1F1;height: 35px;width: 150%;text-align: center;" readonly>
+                <input type="text" name="buyer_id" value="{{ Session::get('user')->id }}" style="background-color: #F0F1F1;height: 35px;width: 150%;text-align: center;" readonly>
             </td>
         </tr>
         <tr>
             <td>Buyer Name</td>
             <td>
-                <input type="text" name="buyer_name" value="{{$user->full_name}}" style="background-color: #F0F1F1;height: 35px;width: 150%;text-align: center;" readonly>
+                <input type="text" name="buyer_name" value="{{ Session::get('user')->full_name}}" style="background-color: #F0F1F1;height: 35px;width: 150%;text-align: center;" readonly>
             </td>
         </tr>
 
