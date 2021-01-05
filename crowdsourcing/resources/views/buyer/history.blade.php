@@ -3,9 +3,9 @@
 
 @section('content')
 @csrf
-<div class="container" style="background-color: #EEEEEE; padding: 60px 10px">
+<div class="container" style="background-color: #EEEEEE; padding: 60px 30px">
     <div class="d-flex justify-content-center">
-        <table class="table table-borderless table-data3"  style="text-align: center">
+        <table class="table table-borderless table-data3"  style="text-align: center;background-color: white">
             <thead style="background-color: #404040;text-align: center;">
                 <tr style="color: white">
                     <th >Name</th>
@@ -19,7 +19,7 @@
                     <th >action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody style="background-color: white">
         		@for($i=0; $i < count($history); $i++)
                 <tr>
                     <td style="  padding: 40px 3px;text-align: center;">{{$history[$i]-> full_name}}</td>

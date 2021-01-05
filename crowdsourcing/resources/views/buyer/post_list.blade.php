@@ -32,8 +32,8 @@
                     <td style="  padding: 30px 3px;text-align: center;">{{$posts[$i]['post_body']}}</td>
                     <td style="  padding: 30px 6px;text-align: center;">{{$posts[$i]['amount']}}</td>
                     <td style="  padding: 30px 0px;text-align: center;">
-                        <a href="/buyer/edit_post/<%= pst.id %>"> <button type="button" class="btn btn-outline-info" style="height: 32px;">Edit</button></a> |
-                        <a href="{{route('post_delete', $posts[$i]['id'])}}{{csrf_token()}}"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></a>
+                        <a href="{{route('post_edit', $posts[$i]['id'])}}?{{csrf_token()}}"> <button type="button" class="btn btn-outline-info" style="height: 32px;">Edit</button></a> |
+                        <a href="{{route('post_delete', $posts[$i]['id'])}}"><button type="button" class="btn btn-outline-danger btn-sm" onclick="check()">Delete</button></a>
                         <a href="{{route('post_available', $posts[$i]['id'])}}{{csrf_token()}}"><button type="button" class="btn btn-outline-success btn-sm">Available</button></a> |
                         <a href="{{route('post_unavailable', $posts[$i]['id'])}}{{csrf_token()}}"><button type="button" class="btn btn-outline-warning btn-sm">Unavailable</button></a>
                     </td>
@@ -46,29 +46,16 @@
     @if(Session::has('create_post'))
 
 		<script>
-			swal("Done!", "Post is Created", "success");
+			swal("Done!", "Post has been created", "success");
+        </script>
+        @elseif(Session::has('update_post'))
+
+    <script>
+      swal("Updated!", "Post has been updated", "success");
         </script>
     
-	@elseif(Session::has('post_delete'))
 
-		<script>
-			swal({
-  title: "Are you sure?",
-  text: "Once deleted, you will not be able to recover this imaginary file!",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-})
-.then((willDelete) => {
-  if (willDelete) {
-    swal("Poof! Your imaginary file has been deleted!", {
-      icon: "success",
-    });
-  } else {
-    swal("Your imaginary file is safe!");
-  }
-});
-		</script>
+		
 	
 	@endif
 @endsection

@@ -154,7 +154,7 @@
           <a class="dropdown-item" href="{{ route('profile', Session::get('user')->id) }}">Profile</a>
          
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{{route('reset',csrf_token())}}">Reset Password</a>
+          <a class="dropdown-item" href="">Reset Password</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
           

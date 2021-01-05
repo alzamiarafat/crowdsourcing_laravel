@@ -10,12 +10,22 @@ use App\Models\Seller;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Exception\GuzzleException;
 
+use Dotenv\Validator as DotenvValidator;
+use Validator;
+
 use PDF;
 
 
 class buyerController extends Controller
 {
    public function dashboardIndex(Request $req){
+
+        $available_post = PostTable::where('status', 'Available')->get();
+        $unavailable_post = PostTable::where('status', 'Unavailable')->get();
+        $sellers = Seller::all();
+        $own_post = PostTable::where('buyer_name', $req->Session()->get('user')->full_name)->get();
+
+
         $posts = DB::table('post_table')
             ->join('user', 'post_table.buyer_id', '=', 'user.id')
             ->get();
@@ -24,7 +34,14 @@ class buyerController extends Controller
         // $posts= PostTable::all();
         //echo $posts;
 
-    	return view('buyer.dashboard',['posts'=>$posts]);
+    	return view('buyer.dashboard',[
+            'posts'=>$posts,
+            'available_post'=>$available_post->count(),
+            'unavailable_post'=>$unavailable_post->count(),
+            'sellers'=>$sellers->count(),
+            'own_post'=>$own_post->count()
+
+        ]);
     }
 
     public function profile($id,Request $req){
@@ -96,6 +113,7 @@ class buyerController extends Controller
         $posts = PostTable::where('buyer_id', $user->id)
         ->get();
         //echo $posts;
+        //echo gettype($posts);
         return view('buyer.post_list', ['posts'=>$posts]);
     }
 
@@ -114,7 +132,58 @@ class buyerController extends Controller
         return view('buyer.post_create');
     }
 
+    public function postEdit($id, Request $req){
+        
+        //echo $id;
+        $find_post = PostTable::find($id);
+
+        //echo $find_post;
+        
+        return view('buyer.post_edit',['find_post'=>$find_post]);
+    }
+
+    public function postUpdate($id,Request $req)
+    {
+        $post_edit = PostTable::find($id);
+
+        $validation = Validator::make($req->all(), [
+            'title' => 'min:3|required|max:100|string',
+            'status' => 'string|required',
+            'post_body'=>'min:10|required|max:50|string'
+        ]);
+
+        if ($validation->fails())
+        {
+            return redirect()->route('create_post')->withErrors($validation)->withInput();
+        }else{
+
+        $post_edit = new PostTable();
+
+        $post_edit->buyer_id   = $req->buyer_id;
+        $post_edit->buyer_name =$req->buyer_name;
+        $post_edit->title      = $req->title;
+        $post_edit->post_body  = $req->post_body;
+        $post_edit->status     = $req->status;
+        $post_edit->amount     = $req->amount;
+        
+        $createPost->save();
+         return redirect()->route('post_list')->with('update_post','update');
+     }
+
+    }
+
     public function createPost(Request $req){
+
+        $validation = Validator::make($req->all(), [
+            'title' => 'min:3|required|max:100|string',
+            'status' => 'string|required',
+            'post_body'=>'min:10|required|max:50|string'
+        ]);
+
+        if ($validation->fails())
+        {
+            return redirect()->route('create_post')->withErrors($validation)->withInput();
+        }else{
 
         $createPost = new PostTable();
 
@@ -127,6 +196,7 @@ class buyerController extends Controller
         
         $createPost->save();
          return redirect()->route('post_list')->with('create_post','Post inserted');
+     }
     }
     public function postDelete($id,Request $req){
         
@@ -187,6 +257,7 @@ class buyerController extends Controller
             //->select('user.full_name','post_table.title','post_table.status','post_table.post_body','post_table.seller_name','seller.category_name','user.contact','post_table.amount')
             ->get();
         //echo $history;
+
         return view('buyer.history', ['history'=>$history],['user'=>$user]);
     }
 
@@ -232,7 +303,7 @@ class buyerController extends Controller
 
          
         $searchItem= $req->searchItem;
-        echo $searchItem;
+     
 
         
     //     / return response()->json(['success'=>'Added new records.']);
@@ -242,9 +313,28 @@ class buyerController extends Controller
 
             $url = "http://localhost:8080/get_activity/search/".$searchItem;
 
-            $response = $client->request('GET', $url);
 
-            echo $response->getBody();
+            $response = $client->request('GET', $url);
+            
+            $result = json_decode($response->getBody(), true);
+            //$data = $response->getBody();
+
+             if(empty($result)){
+                $data = ['results' => []];
+                $request->session()->flash('search', "User Not Found!");
+                return view('buyer.search', $data);
+            }
+            else{
+                $data = ['results' => $result];
+                return view('buyer.search_result', $data);
+            }
+
+
+        
+            //return view('buyer.search_result',['data'=>$data]);
+
+
+            //echo $data->username;
         }
         catch(GuzzleException $e){
         
